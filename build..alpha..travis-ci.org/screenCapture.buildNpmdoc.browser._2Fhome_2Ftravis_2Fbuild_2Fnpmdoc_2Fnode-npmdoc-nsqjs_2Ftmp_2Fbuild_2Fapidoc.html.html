@@ -1,0 +1,4541 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/dudleycarr/nsqjs">nsqjs (v0.7.13)</a>
+</h1>
+<h4>NodeJS client for NSQ</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs">module nsqjs</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection">
+            function <span class="apidocSignatureSpan">nsqjs.</span>NSQDConnection
+            <span class="apidocSignatureSpan">(nsqdHost1, nsqdPort1, topic1, channel, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader">
+            function <span class="apidocSignatureSpan">nsqjs.</span>Reader
+            <span class="apidocSignatureSpan">(topic, channel, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Writer">
+            function <span class="apidocSignatureSpan">nsqjs.</span>Writer
+            <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.WriterNSQDConnection">
+            function <span class="apidocSignatureSpan">nsqjs.</span>WriterNSQDConnection
+            <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.backofftimer">
+            function <span class="apidocSignatureSpan">nsqjs.</span>backofftimer
+            <span class="apidocSignatureSpan">(minInterval, maxInterval, ratio, shortLength, longLength)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.framebuffer">
+            function <span class="apidocSignatureSpan">nsqjs.</span>framebuffer
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message">
+            function <span class="apidocSignatureSpan">nsqjs.</span>message
+            <span class="apidocSignatureSpan">(id, timestamp, attempts, body, requeueDelay, msgTimeout, maxMsgTimeout)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.roundrobinlist">
+            function <span class="apidocSignatureSpan">nsqjs.</span>roundrobinlist
+            <span class="apidocSignatureSpan">(lst)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>NSQDConnection.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>Reader.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>Writer.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>WriterNSQDConnection.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>backofftimer.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>config</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>framebuffer.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>message.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>readerrdy</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>roundrobinlist.prototype</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.</span>wire</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.NSQDConnection">module nsqjs.NSQDConnection</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>usingDomains</span>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.NSQDConnection">
+            function <span class="apidocSignatureSpan">nsqjs.</span>NSQDConnection
+            <span class="apidocSignatureSpan">(nsqdHost1, nsqdPort1, topic1, channel, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.EventEmitter">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>EventEmitter
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.init">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>init
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.listenerCount">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>listenerCount
+            <span class="apidocSignatureSpan">(emitter, type)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>defaultMaxListeners</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>__super__</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>BACKOFF</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>CLOSED</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>CONNECTED</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>CONNECTION_ERROR</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>ERROR</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>FINISHED</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>MESSAGE</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>READY</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>REQUEUED</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.NSQDConnection.prototype">module nsqjs.NSQDConnection.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.clearIdentifyTimeout">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>clearIdentifyTimeout
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.connect">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>connect
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.connectionState">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>connectionState
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.constructor">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>constructor
+            <span class="apidocSignatureSpan">(nsqdHost1, nsqdPort1, topic1, channel, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.createMessage">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>createMessage
+            <span class="apidocSignatureSpan">(msgPayload)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.destroy">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>destroy
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.id">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>id
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.identify">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>identify
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.identifyTimeout">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>identifyTimeout
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.receiveData">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>receiveData
+            <span class="apidocSignatureSpan">(data)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.receiveRawData">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>receiveRawData
+            <span class="apidocSignatureSpan">(data)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.reconsumeFrameBuffer">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>reconsumeFrameBuffer
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.registerStreamListeners">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>registerStreamListeners
+            <span class="apidocSignatureSpan">(conn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.setRdy">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>setRdy
+            <span class="apidocSignatureSpan">(rdyCount)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.startDeflate">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>startDeflate
+            <span class="apidocSignatureSpan">(level)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.startSnappy">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>startSnappy
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.startTLS">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>startTLS
+            <span class="apidocSignatureSpan">(callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.NSQDConnection.prototype.write">
+            function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>write
+            <span class="apidocSignatureSpan">(data)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.Reader">module nsqjs.Reader</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">nsqjs.Reader.</span>usingDomains</span>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.Reader">
+            function <span class="apidocSignatureSpan">nsqjs.</span>Reader
+            <span class="apidocSignatureSpan">(topic, channel, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.EventEmitter">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.</span>EventEmitter
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.init">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.</span>init
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.listenerCount">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.</span>listenerCount
+            <span class="apidocSignatureSpan">(emitter, type)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.Reader.</span>defaultMaxListeners</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.Reader.</span>__super__</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.Reader.</span>DISCARD</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.Reader.</span>ERROR</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.Reader.</span>MESSAGE</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.Reader.</span>NSQD_CLOSED</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.Reader.</span>NSQD_CONNECTED</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.Reader.prototype">module nsqjs.Reader.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.prototype.close">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>close
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.prototype.connect">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>connect
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.prototype.connectToNSQD">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>connectToNSQD
+            <span class="apidocSignatureSpan">(host, port)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.prototype.constructor">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>constructor
+            <span class="apidocSignatureSpan">(topic, channel, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.prototype.handleMessage">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>handleMessage
+            <span class="apidocSignatureSpan">(message)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.prototype.isPaused">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>isPaused
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.prototype.pause">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>pause
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.prototype.queryLookupd">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>queryLookupd
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.prototype.registerConnectionListeners">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>registerConnectionListeners
+            <span class="apidocSignatureSpan">(conn)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Reader.prototype.unpause">
+            function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>unpause
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.Writer">module nsqjs.Writer</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">nsqjs.Writer.</span>usingDomains</span>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Writer.Writer">
+            function <span class="apidocSignatureSpan">nsqjs.</span>Writer
+            <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Writer.EventEmitter">
+            function <span class="apidocSignatureSpan">nsqjs.Writer.</span>EventEmitter
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Writer.init">
+            function <span class="apidocSignatureSpan">nsqjs.Writer.</span>init
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Writer.listenerCount">
+            function <span class="apidocSignatureSpan">nsqjs.Writer.</span>listenerCount
+            <span class="apidocSignatureSpan">(emitter, type)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.Writer.</span>defaultMaxListeners</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.Writer.</span>__super__</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.Writer.</span>CLOSED</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.Writer.</span>ERROR</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.Writer.</span>READY</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.Writer.prototype">module nsqjs.Writer.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Writer.prototype.close">
+            function <span class="apidocSignatureSpan">nsqjs.Writer.prototype.</span>close
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Writer.prototype.connect">
+            function <span class="apidocSignatureSpan">nsqjs.Writer.prototype.</span>connect
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Writer.prototype.constructor">
+            function <span class="apidocSignatureSpan">nsqjs.Writer.prototype.</span>constructor
+            <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.Writer.prototype.publish">
+            function <span class="apidocSignatureSpan">nsqjs.Writer.prototype.</span>publish
+            <span class="apidocSignatureSpan">(topic, msgs, callback)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.WriterNSQDConnection">module nsqjs.WriterNSQDConnection</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>usingDomains</span>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.WriterNSQDConnection.WriterNSQDConnection">
+            function <span class="apidocSignatureSpan">nsqjs.</span>WriterNSQDConnection
+            <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.WriterNSQDConnection.EventEmitter">
+            function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>EventEmitter
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.WriterNSQDConnection.init">
+            function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>init
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.WriterNSQDConnection.listenerCount">
+            function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>listenerCount
+            <span class="apidocSignatureSpan">(emitter, type)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>defaultMaxListeners</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>__super__</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>BACKOFF</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>CLOSED</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>CONNECTED</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>CONNECTION_ERROR</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>ERROR</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>FINISHED</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>MESSAGE</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>READY</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>REQUEUED</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.WriterNSQDConnection.prototype">module nsqjs.WriterNSQDConnection.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.WriterNSQDConnection.prototype.connectionState">
+            function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.prototype.</span>connectionState
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.WriterNSQDConnection.prototype.constructor">
+            function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.prototype.</span>constructor
+            <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.WriterNSQDConnection.prototype.produceMessages">
+            function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.prototype.</span>produceMessages
+            <span class="apidocSignatureSpan">(topic, msgs, callback)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.backofftimer">module nsqjs.backofftimer</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.backofftimer.backofftimer">
+            function <span class="apidocSignatureSpan">nsqjs.</span>backofftimer
+            <span class="apidocSignatureSpan">(minInterval, maxInterval, ratio, shortLength, longLength)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.backofftimer.prototype">module nsqjs.backofftimer.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.backofftimer.prototype.failure">
+            function <span class="apidocSignatureSpan">nsqjs.backofftimer.prototype.</span>failure
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.backofftimer.prototype.getInterval">
+            function <span class="apidocSignatureSpan">nsqjs.backofftimer.prototype.</span>getInterval
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.backofftimer.prototype.success">
+            function <span class="apidocSignatureSpan">nsqjs.backofftimer.prototype.</span>success
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.config">module nsqjs.config</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.config.ConnectionConfig">
+            function <span class="apidocSignatureSpan">nsqjs.config.</span>ConnectionConfig
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.config.ReaderConfig">
+            function <span class="apidocSignatureSpan">nsqjs.config.</span>ReaderConfig
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.framebuffer">module nsqjs.framebuffer</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.framebuffer.framebuffer">
+            function <span class="apidocSignatureSpan">nsqjs.</span>framebuffer
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.framebuffer.prototype">module nsqjs.framebuffer.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.framebuffer.prototype.consume">
+            function <span class="apidocSignatureSpan">nsqjs.framebuffer.prototype.</span>consume
+            <span class="apidocSignatureSpan">(raw)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.framebuffer.prototype.frameSize">
+            function <span class="apidocSignatureSpan">nsqjs.framebuffer.prototype.</span>frameSize
+            <span class="apidocSignatureSpan">(offset)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.framebuffer.prototype.nextFrame">
+            function <span class="apidocSignatureSpan">nsqjs.framebuffer.prototype.</span>nextFrame
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.framebuffer.prototype.nextOffset">
+            function <span class="apidocSignatureSpan">nsqjs.framebuffer.prototype.</span>nextOffset
+            <span class="apidocSignatureSpan">(offset)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.framebuffer.prototype.pluckFrame">
+            function <span class="apidocSignatureSpan">nsqjs.framebuffer.prototype.</span>pluckFrame
+            <span class="apidocSignatureSpan">(offset)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.message">module nsqjs.message</a><ol>
+
+        <li>
+
+            <span class="apidocSignatureSpan">boolean <span class="apidocSignatureSpan">nsqjs.message.</span>usingDomains</span>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.message">
+            function <span class="apidocSignatureSpan">nsqjs.</span>message
+            <span class="apidocSignatureSpan">(id, timestamp, attempts, body, requeueDelay, msgTimeout, maxMsgTimeout)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.EventEmitter">
+            function <span class="apidocSignatureSpan">nsqjs.message.</span>EventEmitter
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.init">
+            function <span class="apidocSignatureSpan">nsqjs.message.</span>init
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.listenerCount">
+            function <span class="apidocSignatureSpan">nsqjs.message.</span>listenerCount
+            <span class="apidocSignatureSpan">(emitter, type)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.message.</span>FINISH</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.message.</span>REQUEUE</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.message.</span>TOUCH</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.message.</span>defaultMaxListeners</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">nsqjs.message.</span>__super__</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.message.</span>BACKOFF</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.message.</span>RESPOND</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.message.prototype">module nsqjs.message.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.prototype.constructor">
+            function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>constructor
+            <span class="apidocSignatureSpan">(id, timestamp, attempts, body, requeueDelay, msgTimeout, maxMsgTimeout)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.prototype.finish">
+            function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>finish
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.prototype.json">
+            function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>json
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.prototype.requeue">
+            function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>requeue
+            <span class="apidocSignatureSpan">(delay, backoff)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.prototype.respond">
+            function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>respond
+            <span class="apidocSignatureSpan">(responseType, wireData)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.prototype.timeUntilTimeout">
+            function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>timeUntilTimeout
+            <span class="apidocSignatureSpan">(hard)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.message.prototype.touch">
+            function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>touch
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.readerrdy">module nsqjs.readerrdy</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.readerrdy.ConnectionRdy">
+            function <span class="apidocSignatureSpan">nsqjs.readerrdy.</span>ConnectionRdy
+            <span class="apidocSignatureSpan">(conn1)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.readerrdy.ReaderRdy">
+            function <span class="apidocSignatureSpan">nsqjs.readerrdy.</span>ReaderRdy
+            <span class="apidocSignatureSpan">(maxInFlight, maxBackoffDuration, readerId1, lowRdyTimeout)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.roundrobinlist">module nsqjs.roundrobinlist</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.roundrobinlist.roundrobinlist">
+            function <span class="apidocSignatureSpan">nsqjs.</span>roundrobinlist
+            <span class="apidocSignatureSpan">(lst)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.roundrobinlist.prototype">module nsqjs.roundrobinlist.prototype</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.roundrobinlist.prototype.add">
+            function <span class="apidocSignatureSpan">nsqjs.roundrobinlist.prototype.</span>add
+            <span class="apidocSignatureSpan">(item)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.roundrobinlist.prototype.length">
+            function <span class="apidocSignatureSpan">nsqjs.roundrobinlist.prototype.</span>length
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.roundrobinlist.prototype.next">
+            function <span class="apidocSignatureSpan">nsqjs.roundrobinlist.prototype.</span>next
+            <span class="apidocSignatureSpan">(count)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.roundrobinlist.prototype.remove">
+            function <span class="apidocSignatureSpan">nsqjs.roundrobinlist.prototype.</span>remove
+            <span class="apidocSignatureSpan">(item)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs.wire">module nsqjs.wire</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.auth">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>auth
+            <span class="apidocSignatureSpan">(token)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.finish">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>finish
+            <span class="apidocSignatureSpan">(id)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.identify">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>identify
+            <span class="apidocSignatureSpan">(data)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.mpub">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>mpub
+            <span class="apidocSignatureSpan">(topic, data)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.nop">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>nop
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.pub">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>pub
+            <span class="apidocSignatureSpan">(topic, data)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.ready">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>ready
+            <span class="apidocSignatureSpan">(count)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.requeue">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>requeue
+            <span class="apidocSignatureSpan">(id, timeMs)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.subscribe">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>subscribe
+            <span class="apidocSignatureSpan">(topic, channel)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.touch">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>touch
+            <span class="apidocSignatureSpan">(id)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.nsqjs.wire.unpackMessage">
+            function <span class="apidocSignatureSpan">nsqjs.wire.</span>unpackMessage
+            <span class="apidocSignatureSpan">(data)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.wire.</span>FRAME_TYPE_ERROR</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.wire.</span>FRAME_TYPE_MESSAGE</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">number <span class="apidocSignatureSpan">nsqjs.wire.</span>FRAME_TYPE_RESPONSE</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">nsqjs.wire.</span>MAGIC_V2</span>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs" id="apidoc.module.nsqjs">module nsqjs</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection" id="apidoc.element.nsqjs.NSQDConnection">
+        function <span class="apidocSignatureSpan">nsqjs.</span>NSQDConnection
+        <span class="apidocSignatureSpan">(nsqdHost1, nsqdPort1, topic1, channel, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function NSQDConnection(nsqdHost1, nsqdPort1, topic1, channel, options) {
+  var connId;
+  this.nsqdHost = nsqdHost1;
+  this.nsqdPort = nsqdPort1;
+  this.topic = topic1;
+  this.channel = channel;
+  if (options == null) {
+    options = {};
+  }
+  NSQDConnection.__super__.constructor.apply(this, arguments);
+  connId = this.id().replace(':', '/');
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel + ":conn:" + connId);
+  this.config = new ConnectionConfig(options);
+  this.config.validate();
+  this.frameBuffer = new FrameBuffer();
+  this.statemachine = this.connectionState();
+  this.maxRdyCount = 0;
+  this.msgTimeout = 0;
+  this.maxMsgTimeout = 0;
+  this.nsqdVersion = null;
+  this.lastMessageTimestamp = null;
+  this.lastReceivedTimestamp = null;
+  this.conn = null;
+  this.identifyTimeoutId = null;
+  this.messageCallbacks = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader" id="apidoc.element.nsqjs.Reader">
+        function <span class="apidocSignatureSpan">nsqjs.</span>Reader
+        <span class="apidocSignatureSpan">(topic, channel, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Reader(topic, channel, options) {
+  this.topic = topic;
+  this.channel = channel;
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel);
+  this.config = new ReaderConfig(options);
+  this.config.validate();
+  this.debug('Configuration');
+  this.debug(this.config);
+  this.roundrobinLookupd = new RoundRobinList(this.config.lookupdHTTPAddresses);
+  this.readerRdy = new ReaderRdy(this.config.maxInFlight, this.config.maxBackoffDuration, this.topic + "/" + this.channel);
+  this.connectIntervalId = null;
+  this.connectionIds = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+$ nsqd --lookupd-tcp-address=127.0.0.1:4160 &amp;
+```
+
+#### JavaScript
+```js
+var nsq = require('nsqjs');
+
+var reader = new nsq.<span class="apidocCodeKeywordSpan">Reader</span>('sample_topic', 'test_channel', {
+lookupdHTTPAddresses: '127.0.0.1:4161'
+});
+
+reader.connect();
+
+reader.on('message', function (msg) {
+console.log('Received message [%s]: %s', msg.id, msg.body.toString());
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Writer" id="apidoc.element.nsqjs.Writer">
+        function <span class="apidocSignatureSpan">nsqjs.</span>Writer
+        <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Writer(nsqdHost, nsqdPort, options) {
+  this.nsqdHost = nsqdHost;
+  this.nsqdPort = nsqdPort;
+  Writer.__super__.constructor.apply(this, arguments);
+  this.setMaxListeners(10000);
+  this.debug = Debug("nsqjs:writer:" + this.nsqdHost + "/" + this.nsqdPort);
+  this.config = new ConnectionConfig(options);
+  this.config.validate();
+  this.ready = false;
+  this.debug('Configuration');
+  this.debug(this.config);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+The writer sends a single message and then a list of messages.
+
+#### JavaScript
+```js
+var nsq = require('nsqjs');
+
+var w = new nsq.<span class="apidocCodeKeywordSpan">Writer</span>('127.0.0.1', 4150);
+
+w.connect();
+
+w.on('ready', function () {
+w.publish('sample_topic', 'it really tied the room together');
+w.publish('sample_topic', [
+  'Uh, excuse me. Mark it zero. Next frame.',
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.WriterNSQDConnection" id="apidoc.element.nsqjs.WriterNSQDConnection">
+        function <span class="apidocSignatureSpan">nsqjs.</span>WriterNSQDConnection
+        <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function WriterNSQDConnection(nsqdHost, nsqdPort, options) {
+  if (options == null) {
+    options = {};
+  }
+  WriterNSQDConnection.__super__.constructor.call(this, nsqdHost, nsqdPort, null, null, options);
+  this.debug = Debug("nsqjs:writer:conn:" + nsqdHost + "/" + nsqdPort);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.backofftimer" id="apidoc.element.nsqjs.backofftimer">
+        function <span class="apidocSignatureSpan">nsqjs.</span>backofftimer
+        <span class="apidocSignatureSpan">(minInterval, maxInterval, ratio, shortLength, longLength)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function BackoffTimer(minInterval, maxInterval, ratio, shortLength, longLength) {
+  var intervalDelta;
+  if (ratio == null) {
+    ratio = .25;
+  }
+  if (shortLength == null) {
+    shortLength = 10;
+  }
+  if (longLength == null) {
+    longLength = 250;
+  }
+  this.minInterval = decimal(minInterval);
+  this.maxInterval = decimal(maxInterval);
+  ratio = decimal(ratio);
+  intervalDelta = decimal(this.maxInterval - this.minInterval);
+  this.maxShortTimer = intervalDelta.times(ratio);
+  this.maxLongTimer = intervalDelta.times(decimal(1).minus(ratio));
+  this.shortUnit = this.maxShortTimer.dividedBy(shortLength);
+  this.longUnit = this.maxLongTimer.dividedBy(longLength);
+  this.shortInterval = decimal(0);
+  this.longInterval = decimal(0);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.framebuffer" id="apidoc.element.nsqjs.framebuffer">
+        function <span class="apidocSignatureSpan">nsqjs.</span>framebuffer
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function FrameBuffer() {}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message" id="apidoc.element.nsqjs.message">
+        function <span class="apidocSignatureSpan">nsqjs.</span>message
+        <span class="apidocSignatureSpan">(id, timestamp, attempts, body, requeueDelay, msgTimeout, maxMsgTimeout)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Message(id, timestamp, attempts, body, requeueDelay, msgTimeout, maxMsgTimeout) {
+  var trackTimeout;
+  this.id = id;
+  this.timestamp = timestamp;
+  this.attempts = attempts;
+  this.body = body;
+  this.requeueDelay = requeueDelay;
+  this.msgTimeout = msgTimeout;
+  this.maxMsgTimeout = maxMsgTimeout;
+  this.hasResponded = false;
+  this.receivedOn = Date.now();
+  this.lastTouched = this.receivedOn;
+  this.touchCount = 0;
+  this.timedOut = false;
+  (trackTimeout = (function(_this) {
+    return function() {
+      var hard, soft;
+      if (_this.hasResponded) {
+        return;
+      }
+      soft = _this.timeUntilTimeout();
+      hard = _this.timeUntilTimeout(true);
+      _this.timedOut = !soft || !hard;
+      if (!_this.timedOut) {
+        return setTimeout(trackTimeout, Math.min(soft, hard));
+      }
+    };
+  })(this))();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.roundrobinlist" id="apidoc.element.nsqjs.roundrobinlist">
+        function <span class="apidocSignatureSpan">nsqjs.</span>roundrobinlist
+        <span class="apidocSignatureSpan">(lst)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function RoundRobinList(lst) {
+  this.lst = lst.slice(0);
+  this.index = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.NSQDConnection" id="apidoc.module.nsqjs.NSQDConnection">module nsqjs.NSQDConnection</a></h1>
+
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.NSQDConnection" id="apidoc.element.nsqjs.NSQDConnection.NSQDConnection">
+        function <span class="apidocSignatureSpan">nsqjs.</span>NSQDConnection
+        <span class="apidocSignatureSpan">(nsqdHost1, nsqdPort1, topic1, channel, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function NSQDConnection(nsqdHost1, nsqdPort1, topic1, channel, options) {
+  var connId;
+  this.nsqdHost = nsqdHost1;
+  this.nsqdPort = nsqdPort1;
+  this.topic = topic1;
+  this.channel = channel;
+  if (options == null) {
+    options = {};
+  }
+  NSQDConnection.__super__.constructor.apply(this, arguments);
+  connId = this.id().replace(':', '/');
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel + ":conn:" + connId);
+  this.config = new ConnectionConfig(options);
+  this.config.validate();
+  this.frameBuffer = new FrameBuffer();
+  this.statemachine = this.connectionState();
+  this.maxRdyCount = 0;
+  this.msgTimeout = 0;
+  this.maxMsgTimeout = 0;
+  this.nsqdVersion = null;
+  this.lastMessageTimestamp = null;
+  this.lastReceivedTimestamp = null;
+  this.conn = null;
+  this.identifyTimeoutId = null;
+  this.messageCallbacks = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.EventEmitter" id="apidoc.element.nsqjs.NSQDConnection.EventEmitter">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>EventEmitter
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function EventEmitter() {
+  EventEmitter.init.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.init" id="apidoc.element.nsqjs.NSQDConnection.init">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>init
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">init = function () {
+  this.domain = null;
+  if (EventEmitter.usingDomains) {
+    // if there is an active domain, then attach to it.
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
+      this.domain = domain.active;
+    }
+  }
+
+  if (!this._events || this._events === Object.getPrototypeOf(this)._events) {
+    this._events = new EventHandlers();
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.listenerCount" id="apidoc.element.nsqjs.NSQDConnection.listenerCount">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.</span>listenerCount
+        <span class="apidocSignatureSpan">(emitter, type)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.NSQDConnection.prototype" id="apidoc.module.nsqjs.NSQDConnection.prototype">module nsqjs.NSQDConnection.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.clearIdentifyTimeout" id="apidoc.element.nsqjs.NSQDConnection.prototype.clearIdentifyTimeout">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>clearIdentifyTimeout
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">clearIdentifyTimeout = function () {
+  clearTimeout(this.identifyTimeoutId);
+  return this.identifyTimeoutId = null;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.connect" id="apidoc.element.nsqjs.NSQDConnection.prototype.connect">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>connect
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">connect = function () {
+  this.statemachine.raise('connecting');
+  return process.nextTick((function(_this) {
+    return function() {
+      _this.conn = net.connect(_this.nsqdPort, _this.nsqdHost, function() {
+        _this.statemachine.raise('connected');
+        _this.emit(NSQDConnection.CONNECTED);
+        return _this.identifyTimeoutId = setTimeout(_this.identifyTimeout.bind(_this), 5000);
+      });
+      return _this.registerStreamListeners(_this.conn);
+    };
+  })(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+var nsq = require('nsqjs');
+
+var reader = new nsq.Reader('sample_topic', 'test_channel', {
+  lookupdHTTPAddresses: '127.0.0.1:4161'
+});
+
+reader.<span class="apidocCodeKeywordSpan">connect</span>();
+
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
+  msg.finish();
+});
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.connectionState" id="apidoc.element.nsqjs.NSQDConnection.prototype.connectionState">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>connectionState
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">connectionState = function () {
+  return this.statemachine || new ConnectionState(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.constructor" id="apidoc.element.nsqjs.NSQDConnection.prototype.constructor">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>constructor
+        <span class="apidocSignatureSpan">(nsqdHost1, nsqdPort1, topic1, channel, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function NSQDConnection(nsqdHost1, nsqdPort1, topic1, channel, options) {
+  var connId;
+  this.nsqdHost = nsqdHost1;
+  this.nsqdPort = nsqdPort1;
+  this.topic = topic1;
+  this.channel = channel;
+  if (options == null) {
+    options = {};
+  }
+  NSQDConnection.__super__.constructor.apply(this, arguments);
+  connId = this.id().replace(':', '/');
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel + ":conn:" + connId);
+  this.config = new ConnectionConfig(options);
+  this.config.validate();
+  this.frameBuffer = new FrameBuffer();
+  this.statemachine = this.connectionState();
+  this.maxRdyCount = 0;
+  this.msgTimeout = 0;
+  this.maxMsgTimeout = 0;
+  this.nsqdVersion = null;
+  this.lastMessageTimestamp = null;
+  this.lastReceivedTimestamp = null;
+  this.conn = null;
+  this.identifyTimeoutId = null;
+  this.messageCallbacks = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.createMessage" id="apidoc.element.nsqjs.NSQDConnection.prototype.createMessage">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>createMessage
+        <span class="apidocSignatureSpan">(msgPayload)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">createMessage = function (msgPayload) {
+  var msg, msgComponents;
+  msgComponents = wire.unpackMessage(msgPayload);
+  msg = (function(func, args, ctor) {
+    ctor.prototype = func.prototype;
+    var child = new ctor, result = func.apply(child, args);
+    return Object(result) === result ? result : child;
+  })(Message, slice.call(msgComponents).concat([this.config.requeueDelay], [this.msgTimeout], [this.maxMsgTimeout]), function(){});
+  this.debug("Received message [" + msg.id + "] [attempts: " + msg.attempts + "]");
+  msg.on(Message.RESPOND, (function(_this) {
+    return function(responseType, wireData) {
+      _this.write(wireData);
+      if (responseType === Message.FINISH) {
+        _this.debug("Finished message [" + msg.id + "] [timedout=" + (msg.timedout === true) + ", elapsed=" + (Date.now() - msg.
+receivedOn) + "ms, touch_count=" + msg.touchCount + "]");
+        return _this.emit(NSQDConnection.FINISHED);
+      } else if (responseType === Message.REQUEUE) {
+        _this.debug("Requeued message [" + msg.id + "]");
+        return _this.emit(NSQDConnection.REQUEUED);
+      }
+    };
+  })(this));
+  msg.on(Message.BACKOFF, (function(_this) {
+    return function() {
+      return _this.emit(NSQDConnection.BACKOFF);
+    };
+  })(this));
+  return msg;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.destroy" id="apidoc.element.nsqjs.NSQDConnection.prototype.destroy">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>destroy
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">destroy = function () {
+  return this.conn.destroy();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    return function() {
+      return _this.start();
+    };
+  })(this));
+}
+
+ConnectionRdy.prototype.close = function() {
+  return this.conn.<span class="apidocCodeKeywordSpan">destroy</span>();
+};
+
+ConnectionRdy.prototype.name = function() {
+  return String(this.conn.conn.localPort);
+};
+
+ConnectionRdy.prototype.start = function() {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.id" id="apidoc.element.nsqjs.NSQDConnection.prototype.id">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>id
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">id = function () {
+  return this.nsqdHost + ":" + this.nsqdPort;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+ConnectionRdy.STATE_CHANGE = 'statechange';
+
+function ConnectionRdy(conn1) {
+  var connId, readerId;
+  this.conn = conn1;
+  readerId = this.conn.topic + "/" + this.conn.channel;
+  connId = "" + (this.conn.<span class="apidocCodeKeywordSpan">id</span>().replace(':', '/'));
+  this.debug = Debug("nsqjs:reader:" + readerId + ":rdy:conn:" + connId);
+  this.maxConnRdy = 0;
+  this.inFlight = 0;
+  this.lastRdySent = 0;
+  this.availableRdy = 0;
+  this.statemachine = new ConnectionRdyState(this);
+  this.conn.on(NSQDConnection.ERROR, (function(_this) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.identify" id="apidoc.element.nsqjs.NSQDConnection.prototype.identify">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>identify
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">identify = function () {
+  var i, identify, key, len, longName, removableKeys, shortName;
+  longName = os.hostname();
+  shortName = longName.split('.')[0];
+  identify = {
+    client_id: this.config.clientId || shortName,
+    deflate: this.config.deflate,
+    deflate_level: this.config.deflateLevel,
+    feature_negotiation: true,
+    heartbeat_interval: this.config.heartbeatInterval * 1000,
+    long_id: longName,
+    msg_timeout: this.config.messageTimeout,
+    output_buffer_size: this.config.outputBufferSize,
+    output_buffer_timeout: this.config.outputBufferTimeout,
+    sample_rate: this.config.sampleRate,
+    short_id: shortName,
+    snappy: this.config.snappy,
+    tls_v1: this.config.tls,
+    user_agent: "nsqjs/" + version
+  };
+  removableKeys = ['msg_timeout', 'output_buffer_size', 'output_buffer_timeout', 'sample_rate'];
+  for (i = 0, len = removableKeys.length; i &lt; len; i++) {
+    key = removableKeys[i];
+    if (identify[key] === null) {
+      delete identify[key];
+    }
+  }
+  return identify;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.identifyTimeout" id="apidoc.element.nsqjs.NSQDConnection.prototype.identifyTimeout">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>identifyTimeout
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">identifyTimeout = function () {
+  return this.statemachine.goto('ERROR', new Error('Timed out identifying with nsqd'));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.receiveData" id="apidoc.element.nsqjs.NSQDConnection.prototype.receiveData">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>receiveData
+        <span class="apidocSignatureSpan">(data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">receiveData = function (data) {
+  var frame, frameId, payload, results;
+  this.lastReceivedTimestamp = Date.now();
+  this.frameBuffer.consume(data);
+  results = [];
+  while (frame = this.frameBuffer.nextFrame()) {
+    frameId = frame[0], payload = frame[1];
+    switch (frameId) {
+      case wire.FRAME_TYPE_RESPONSE:
+        results.push(this.statemachine.raise('response', payload));
+        break;
+      case wire.FRAME_TYPE_ERROR:
+        results.push(this.statemachine.goto('ERROR', new Error(payload.toString())));
+        break;
+      case wire.FRAME_TYPE_MESSAGE:
+        this.lastMessageTimestamp = this.lastReceivedTimestamp;
+        results.push(this.statemachine.raise('consumeMessage', this.createMessage(payload)));
+        break;
+      default:
+        results.push(void 0);
+    }
+  }
+  return results;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.receiveRawData" id="apidoc.element.nsqjs.NSQDConnection.prototype.receiveRawData">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>receiveRawData
+        <span class="apidocSignatureSpan">(data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">receiveRawData = function (data) {
+  if (!this.inflater) {
+    return this.receiveData(data);
+  } else {
+    return this.inflater.write(data, (function(_this) {
+      return function() {
+        var uncompressedData;
+        uncompressedData = _this.inflater.read();
+        if (uncompressedData) {
+          return _this.receiveData(uncompressedData);
+        }
+      };
+    })(this));
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.reconsumeFrameBuffer" id="apidoc.element.nsqjs.NSQDConnection.prototype.reconsumeFrameBuffer">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>reconsumeFrameBuffer
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">reconsumeFrameBuffer = function () {
+  var data;
+  if (this.frameBuffer.buffer &amp;&amp; this.frameBuffer.buffer.length) {
+    data = this.frameBuffer.buffer;
+    delete this.frameBuffer.buffer;
+    return this.receiveRawData(data);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.registerStreamListeners" id="apidoc.element.nsqjs.NSQDConnection.prototype.registerStreamListeners">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>registerStreamListeners
+        <span class="apidocSignatureSpan">(conn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">registerStreamListeners = function (conn) {
+  conn.on('data', (function(_this) {
+    return function(data) {
+      return _this.receiveRawData(data);
+    };
+  })(this));
+  conn.on('error', (function(_this) {
+    return function(err) {
+      _this.statemachine.goto('CLOSED');
+      return _this.emit('connection_error', err);
+    };
+  })(this));
+  return conn.on('close', (function(_this) {
+    return function(err) {
+      return _this.statemachine.raise('close');
+    };
+  })(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.setRdy" id="apidoc.element.nsqjs.NSQDConnection.prototype.setRdy">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>setRdy
+        <span class="apidocSignatureSpan">(rdyCount)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">setRdy = function (rdyCount) {
+  return this.statemachine.raise('ready', rdyCount);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+
+ConnectionRdy.prototype.setRdy = function(rdyCount) {
+  this.log("RDY " + rdyCount);
+  if (rdyCount &lt; 0 || rdyCount &gt; this.maxConnRdy) {
+    return;
+  }
+  this.conn.<span class="apidocCodeKeywordSpan">setRdy</span>(rdyCount);
+  return this.availableRdy = this.lastRdySent = rdyCount;
+};
+
+ConnectionRdy.prototype.log = function(message) {
+  if (message) {
+    return this.debug(message);
+  }
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.startDeflate" id="apidoc.element.nsqjs.NSQDConnection.prototype.startDeflate">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>startDeflate
+        <span class="apidocSignatureSpan">(level)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">startDeflate = function (level) {
+  this.inflater = zlib.createInflateRaw({
+    flush: zlib.Z_SYNC_FLUSH
+  });
+  this.deflater = zlib.createDeflateRaw({
+    level: level,
+    flush: zlib.Z_SYNC_FLUSH
+  });
+  return this.reconsumeFrameBuffer();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.startSnappy" id="apidoc.element.nsqjs.NSQDConnection.prototype.startSnappy">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>startSnappy
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">startSnappy = function () {
+  this.inflater = new UnsnappyStream();
+  this.deflater = new SnappyStream();
+  return this.reconsumeFrameBuffer();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.startTLS" id="apidoc.element.nsqjs.NSQDConnection.prototype.startTLS">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>startTLS
+        <span class="apidocSignatureSpan">(callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">startTLS = function (callback) {
+  var event, i, len, options, ref1, tlsConn;
+  ref1 = ['data', 'error', 'close'];
+  for (i = 0, len = ref1.length; i &lt; len; i++) {
+    event = ref1[i];
+    this.conn.removeAllListeners(event);
+  }
+  options = {
+    socket: this.conn,
+    rejectUnauthorized: this.config.tlsVerification
+  };
+  tlsConn = tls.connect(options, (function(_this) {
+    return function() {
+      _this.conn = tlsConn;
+      return typeof callback === "function" ? callback() : void 0;
+    };
+  })(this));
+  return this.registerStreamListeners(tlsConn);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.NSQDConnection.prototype.write" id="apidoc.element.nsqjs.NSQDConnection.prototype.write">
+        function <span class="apidocSignatureSpan">nsqjs.NSQDConnection.prototype.</span>write
+        <span class="apidocSignatureSpan">(data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">write = function (data) {
+  if (this.deflater) {
+    return this.deflater.write(data, (function(_this) {
+      return function() {
+        return _this.conn.write(_this.deflater.read());
+      };
+    })(this));
+  } else {
+    return this.conn.write(data);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  throw new Error("MPUB requires an array of message");
+}
+messages = _.map(data, function(message) {
+  var buffer;
+  buffer = new Buffer(4 + byteLength(message));
+  buffer.writeInt32BE(byteLength(message), 0);
+  if (_.isString(message)) {
+    buffer.<span class="apidocCodeKeywordSpan">write</span>(message, 4);
+  } else {
+    message.copy(buffer, 4, 0, buffer.length);
+  }
+  return buffer;
+});
+numMessagesBuffer = Buffer(4);
+numMessagesBuffer.writeInt32BE(messages.length, 0);
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.Reader" id="apidoc.module.nsqjs.Reader">module nsqjs.Reader</a></h1>
+
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.Reader" id="apidoc.element.nsqjs.Reader.Reader">
+        function <span class="apidocSignatureSpan">nsqjs.</span>Reader
+        <span class="apidocSignatureSpan">(topic, channel, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Reader(topic, channel, options) {
+  this.topic = topic;
+  this.channel = channel;
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel);
+  this.config = new ReaderConfig(options);
+  this.config.validate();
+  this.debug('Configuration');
+  this.debug(this.config);
+  this.roundrobinLookupd = new RoundRobinList(this.config.lookupdHTTPAddresses);
+  this.readerRdy = new ReaderRdy(this.config.maxInFlight, this.config.maxBackoffDuration, this.topic + "/" + this.channel);
+  this.connectIntervalId = null;
+  this.connectionIds = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+$ nsqd --lookupd-tcp-address=127.0.0.1:4160 &amp;
+```
+
+#### JavaScript
+```js
+var nsq = require('nsqjs');
+
+var reader = new nsq.<span class="apidocCodeKeywordSpan">Reader</span>('sample_topic', 'test_channel', {
+lookupdHTTPAddresses: '127.0.0.1:4161'
+});
+
+reader.connect();
+
+reader.on('message', function (msg) {
+console.log('Received message [%s]: %s', msg.id, msg.body.toString());
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.EventEmitter" id="apidoc.element.nsqjs.Reader.EventEmitter">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.</span>EventEmitter
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function EventEmitter() {
+  EventEmitter.init.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.init" id="apidoc.element.nsqjs.Reader.init">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.</span>init
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">init = function () {
+  this.domain = null;
+  if (EventEmitter.usingDomains) {
+    // if there is an active domain, then attach to it.
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
+      this.domain = domain.active;
+    }
+  }
+
+  if (!this._events || this._events === Object.getPrototypeOf(this)._events) {
+    this._events = new EventHandlers();
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.listenerCount" id="apidoc.element.nsqjs.Reader.listenerCount">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.</span>listenerCount
+        <span class="apidocSignatureSpan">(emitter, type)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.Reader.prototype" id="apidoc.module.nsqjs.Reader.prototype">module nsqjs.Reader.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.prototype.close" id="apidoc.element.nsqjs.Reader.prototype.close">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>close
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">close = function () {
+  clearInterval(this.connectIntervalId);
+  return this.readerRdy.close();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  w.publish('sample_topic', [
+    'Uh, excuse me. Mark it zero. Next frame.',
+    'Smokey, this is not \'Nam. This is bowling. There are rules.'
+  ]);
+  w.publish('sample_topic', 'Wu?', function (err) {
+    if (err) { return console.error(err.message); }
+    console.log('Message sent successfully');
+    w.<span class="apidocCodeKeywordSpan">close</span>();
+  });
+});
+
+w.on('closed', function () {
+  console.log('Writer closed');
+});
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.prototype.connect" id="apidoc.element.nsqjs.Reader.prototype.connect">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>connect
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">connect = function () {
+  var delay, delayedStart, directConnect, interval;
+  interval = this.config.lookupdPollInterval * 1000;
+  delay = Math.random() * this.config.lookupdPollJitter * interval;
+  if (this.config.nsqdTCPAddresses.length) {
+    directConnect = (function(_this) {
+      return function() {
+        var addr, address, i, len, port, ref, ref1, results;
+        if (_this.isPaused()) {
+          return;
+        }
+        if (_this.connectionIds.length &lt; _this.config.nsqdTCPAddresses.length) {
+          ref = _this.config.nsqdTCPAddresses;
+          results = [];
+          for (i = 0, len = ref.length; i &lt; len; i++) {
+            addr = ref[i];
+            ref1 = addr.split(':'), address = ref1[0], port = ref1[1];
+            results.push(_this.connectToNSQD(address, Number(port)));
+          }
+          return results;
+        }
+      };
+    })(this);
+    delayedStart = (function(_this) {
+      return function() {
+        return _this.connectIntervalId = setInterval(directConnect.bind(_this), interval);
+      };
+    })(this);
+    directConnect();
+    return setTimeout(delayedStart, delay);
+  } else {
+    delayedStart = (function(_this) {
+      return function() {
+        return _this.connectIntervalId = setInterval(_this.queryLookupd.bind(_this), interval);
+      };
+    })(this);
+    this.queryLookupd();
+    return setTimeout(delayedStart, delay);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+var nsq = require('nsqjs');
+
+var reader = new nsq.Reader('sample_topic', 'test_channel', {
+  lookupdHTTPAddresses: '127.0.0.1:4161'
+});
+
+reader.<span class="apidocCodeKeywordSpan">connect</span>();
+
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
+  msg.finish();
+});
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.prototype.connectToNSQD" id="apidoc.element.nsqjs.Reader.prototype.connectToNSQD">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>connectToNSQD
+        <span class="apidocSignatureSpan">(host, port)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">connectToNSQD = function (host, port) {
+  var conn;
+  this.debug("discovered " + host + ":" + port + " for " + this.topic + " topic");
+  conn = new NSQDConnection(host, port, this.topic, this.channel, this.config);
+  if (this.connectionIds.indexOf(conn.id()) !== -1) {
+    return;
+  }
+  this.debug("connecting to " + host + ":" + port);
+  this.connectionIds.push(conn.id());
+  this.registerConnectionListeners(conn);
+  this.readerRdy.addConnection(conn);
+  return conn.connect();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.prototype.constructor" id="apidoc.element.nsqjs.Reader.prototype.constructor">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>constructor
+        <span class="apidocSignatureSpan">(topic, channel, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Reader(topic, channel, options) {
+  this.topic = topic;
+  this.channel = channel;
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel);
+  this.config = new ReaderConfig(options);
+  this.config.validate();
+  this.debug('Configuration');
+  this.debug(this.config);
+  this.roundrobinLookupd = new RoundRobinList(this.config.lookupdHTTPAddresses);
+  this.readerRdy = new ReaderRdy(this.config.maxInFlight, this.config.maxBackoffDuration, this.topic + "/" + this.channel);
+  this.connectIntervalId = null;
+  this.connectionIds = [];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.prototype.handleMessage" id="apidoc.element.nsqjs.Reader.prototype.handleMessage">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>handleMessage
+        <span class="apidocSignatureSpan">(message)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">handleMessage = function (message) {
+  return process.nextTick((function(_this) {
+    return function() {
+      var autoFinishMessage, numDiscardListeners, ref;
+      autoFinishMessage = (0 &lt; (ref = _this.config.maxAttempts) &amp;&amp; ref &lt;= message.attempts);
+      numDiscardListeners = _this.listeners(Reader.DISCARD).length;
+      if (autoFinishMessage &amp;&amp; numDiscardListeners &gt; 0) {
+        _this.emit(Reader.DISCARD, message);
+      } else {
+        _this.emit(Reader.MESSAGE, message);
+      }
+      if (autoFinishMessage) {
+        return message.finish();
+      }
+    };
+  })(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.prototype.isPaused" id="apidoc.element.nsqjs.Reader.prototype.isPaused">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>isPaused
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">isPaused = function () {
+  return this.readerRdy.isPaused();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+
+ReaderRdy.prototype.isLowRdy = function() {
+  return this.maxInFlight &lt; this.connections.length;
+};
+
+ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
+  if (!this.<span class="apidocCodeKeywordSpan">isPaused</span>()) {
+    if (this.isLowRdy()) {
+      return this.balance();
+    } else {
+      return connectionRdy.bump();
+    }
+  }
+};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.prototype.pause" id="apidoc.element.nsqjs.Reader.prototype.pause">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>pause
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">pause = function () {
+  this.debug('pause');
+  return this.readerRdy.pause();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.prototype.queryLookupd" id="apidoc.element.nsqjs.Reader.prototype.queryLookupd">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>queryLookupd
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">queryLookupd = function () {
+  var endpoint;
+  if (this.isPaused()) {
+    return;
+  }
+  endpoint = this.roundrobinLookupd.next();
+  return lookup(endpoint, this.topic, (function(_this) {
+    return function(err, nodes) {
+      var i, len, n, results;
+      if (!err) {
+        results = [];
+        for (i = 0, len = nodes.length; i &lt; len; i++) {
+          n = nodes[i];
+          results.push(_this.connectToNSQD(n.broadcast_address, n.tcp_port));
+        }
+        return results;
+      }
+    };
+  })(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.prototype.registerConnectionListeners" id="apidoc.element.nsqjs.Reader.prototype.registerConnectionListeners">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>registerConnectionListeners
+        <span class="apidocSignatureSpan">(conn)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">registerConnectionListeners = function (conn) {
+  conn.on(NSQDConnection.CONNECTED, (function(_this) {
+    return function() {
+      _this.debug(Reader.NSQD_CONNECTED);
+      return _this.emit(Reader.NSQD_CONNECTED, conn.nsqdHost, conn.nsqdPort);
+    };
+  })(this));
+  conn.on(NSQDConnection.ERROR, (function(_this) {
+    return function(err) {
+      _this.debug(Reader.ERROR);
+      _this.debug(err);
+      return _this.emit(Reader.ERROR, err);
+    };
+  })(this));
+  conn.on(NSQDConnection.CONNECTION_ERROR, (function(_this) {
+    return function(err) {
+      _this.debug(Reader.ERROR);
+      _this.debug(err);
+      return _this.emit(Reader.ERROR, err);
+    };
+  })(this));
+  conn.on(NSQDConnection.CLOSED, (function(_this) {
+    return function() {
+      var index;
+      _this.debug(Reader.NSQD_CLOSED);
+      index = _this.connectionIds.indexOf(conn.id());
+      if (index === -1) {
+        return;
+      }
+      _this.connectionIds.splice(index, 1);
+      return _this.emit(Reader.NSQD_CLOSED, conn.nsqdHost, conn.nsqdPort);
+    };
+  })(this));
+  return conn.on(NSQDConnection.MESSAGE, (function(_this) {
+    return function(message) {
+      return _this.handleMessage(message);
+    };
+  })(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Reader.prototype.unpause" id="apidoc.element.nsqjs.Reader.prototype.unpause">
+        function <span class="apidocSignatureSpan">nsqjs.Reader.prototype.</span>unpause
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">unpause = function () {
+  this.debug('unpause');
+  return this.readerRdy.unpause();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.Writer" id="apidoc.module.nsqjs.Writer">module nsqjs.Writer</a></h1>
+
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Writer.Writer" id="apidoc.element.nsqjs.Writer.Writer">
+        function <span class="apidocSignatureSpan">nsqjs.</span>Writer
+        <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Writer(nsqdHost, nsqdPort, options) {
+  this.nsqdHost = nsqdHost;
+  this.nsqdPort = nsqdPort;
+  Writer.__super__.constructor.apply(this, arguments);
+  this.setMaxListeners(10000);
+  this.debug = Debug("nsqjs:writer:" + this.nsqdHost + "/" + this.nsqdPort);
+  this.config = new ConnectionConfig(options);
+  this.config.validate();
+  this.ready = false;
+  this.debug('Configuration');
+  this.debug(this.config);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+The writer sends a single message and then a list of messages.
+
+#### JavaScript
+```js
+var nsq = require('nsqjs');
+
+var w = new nsq.<span class="apidocCodeKeywordSpan">Writer</span>('127.0.0.1', 4150);
+
+w.connect();
+
+w.on('ready', function () {
+w.publish('sample_topic', 'it really tied the room together');
+w.publish('sample_topic', [
+  'Uh, excuse me. Mark it zero. Next frame.',
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Writer.EventEmitter" id="apidoc.element.nsqjs.Writer.EventEmitter">
+        function <span class="apidocSignatureSpan">nsqjs.Writer.</span>EventEmitter
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function EventEmitter() {
+  EventEmitter.init.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Writer.init" id="apidoc.element.nsqjs.Writer.init">
+        function <span class="apidocSignatureSpan">nsqjs.Writer.</span>init
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">init = function () {
+  this.domain = null;
+  if (EventEmitter.usingDomains) {
+    // if there is an active domain, then attach to it.
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
+      this.domain = domain.active;
+    }
+  }
+
+  if (!this._events || this._events === Object.getPrototypeOf(this)._events) {
+    this._events = new EventHandlers();
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Writer.listenerCount" id="apidoc.element.nsqjs.Writer.listenerCount">
+        function <span class="apidocSignatureSpan">nsqjs.Writer.</span>listenerCount
+        <span class="apidocSignatureSpan">(emitter, type)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.Writer.prototype" id="apidoc.module.nsqjs.Writer.prototype">module nsqjs.Writer.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Writer.prototype.close" id="apidoc.element.nsqjs.Writer.prototype.close">
+        function <span class="apidocSignatureSpan">nsqjs.Writer.prototype.</span>close
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">close = function () {
+  return this.conn.destroy();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  w.publish('sample_topic', [
+    'Uh, excuse me. Mark it zero. Next frame.',
+    'Smokey, this is not \'Nam. This is bowling. There are rules.'
+  ]);
+  w.publish('sample_topic', 'Wu?', function (err) {
+    if (err) { return console.error(err.message); }
+    console.log('Message sent successfully');
+    w.<span class="apidocCodeKeywordSpan">close</span>();
+  });
+});
+
+w.on('closed', function () {
+  console.log('Writer closed');
+});
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Writer.prototype.connect" id="apidoc.element.nsqjs.Writer.prototype.connect">
+        function <span class="apidocSignatureSpan">nsqjs.Writer.prototype.</span>connect
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">connect = function () {
+  this.conn = new WriterNSQDConnection(this.nsqdHost, this.nsqdPort, this.config);
+  this.debug('connect');
+  this.conn.connect();
+  this.conn.on(WriterNSQDConnection.READY, (function(_this) {
+    return function() {
+      _this.debug('ready');
+      _this.ready = true;
+      return _this.emit(Writer.READY);
+    };
+  })(this));
+  this.conn.on(WriterNSQDConnection.CLOSED, (function(_this) {
+    return function() {
+      _this.debug('closed');
+      _this.ready = false;
+      return _this.emit(Writer.CLOSED);
+    };
+  })(this));
+  this.conn.on(WriterNSQDConnection.ERROR, (function(_this) {
+    return function(err) {
+      _this.debug('error', err);
+      _this.ready = false;
+      return _this.emit(Writer.ERROR, err);
+    };
+  })(this));
+  return this.conn.on(WriterNSQDConnection.CONNECTION_ERROR, (function(_this) {
+    return function(err) {
+      _this.debug('error', err);
+      _this.ready = false;
+      return _this.emit(Writer.ERROR, err);
+    };
+  })(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+var nsq = require('nsqjs');
+
+var reader = new nsq.Reader('sample_topic', 'test_channel', {
+  lookupdHTTPAddresses: '127.0.0.1:4161'
+});
+
+reader.<span class="apidocCodeKeywordSpan">connect</span>();
+
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
+  msg.finish();
+});
+```
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Writer.prototype.constructor" id="apidoc.element.nsqjs.Writer.prototype.constructor">
+        function <span class="apidocSignatureSpan">nsqjs.Writer.prototype.</span>constructor
+        <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Writer(nsqdHost, nsqdPort, options) {
+  this.nsqdHost = nsqdHost;
+  this.nsqdPort = nsqdPort;
+  Writer.__super__.constructor.apply(this, arguments);
+  this.setMaxListeners(10000);
+  this.debug = Debug("nsqjs:writer:" + this.nsqdHost + "/" + this.nsqdPort);
+  this.config = new ConnectionConfig(options);
+  this.config.validate();
+  this.ready = false;
+  this.debug('Configuration');
+  this.debug(this.config);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.Writer.prototype.publish" id="apidoc.element.nsqjs.Writer.prototype.publish">
+        function <span class="apidocSignatureSpan">nsqjs.Writer.prototype.</span>publish
+        <span class="apidocSignatureSpan">(topic, msgs, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">publish = function (topic, msgs, callback) {
+  var connState, err, failed, msg, ready, ref, ref1, remove;
+  connState = (ref = this.conn) != null ? (ref1 = ref.statemachine) != null ? ref1.current_state_name : void 0 : void 0;
+  if (!this.conn || (connState === 'CLOSED' || connState === 'ERROR')) {
+    err = new Error('No active Writer connection to send messages');
+  }
+  if (!msgs || _.isEmpty(msgs)) {
+    err = new Error('Attempting to publish an empty message');
+  }
+  if (err) {
+    if (callback) {
+      return callback(err);
+    }
+    throw err;
+  }
+  if (!this.ready) {
+    ready = (function(_this) {
+      return function() {
+        remove();
+        return _this.publish(topic, msgs, callback);
+      };
+    })(this);
+    failed = function(err) {
+      err || (err = new Error('Connection closed!'));
+      remove();
+      return callback(err);
+    };
+    remove = (function(_this) {
+      return function() {
+        _this.removeListener(Writer.READY, ready);
+        _this.removeListener(Writer.ERROR, failed);
+        return _this.removeListener(Writer.CLOSED, failed);
+      };
+    })(this);
+    this.on(Writer.READY, ready);
+    this.on(Writer.ERROR, failed);
+    this.on(Writer.CLOSED, failed);
+    return;
+  }
+  if (!_.isArray(msgs)) {
+    msgs = [msgs];
+  }
+  msgs = (function() {
+    var i, len, results;
+    results = [];
+    for (i = 0, len = msgs.length; i &lt; len; i++) {
+      msg = msgs[i];
+      if (_.isString(msg) || Buffer.isBuffer(msg)) {
+        results.push(msg);
+      } else {
+        results.push(JSON.stringify(msg));
+      }
+    }
+    return results;
+  })();
+  return this.conn.produceMessages(topic, msgs, callback);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var nsq = require('nsqjs');
+
+var w = new nsq.Writer('127.0.0.1', 4150);
+
+w.connect();
+
+w.on('ready', function () {
+w.<span class="apidocCodeKeywordSpan">publish</span>('sample_topic', 'it really tied the room together');
+w.publish('sample_topic', [
+  'Uh, excuse me. Mark it zero. Next frame.',
+  'Smokey, this is not \'Nam. This is bowling. There are rules.'
+]);
+w.publish('sample_topic', 'Wu?', function (err) {
+  if (err) { return console.error(err.message); }
+  console.log('Message sent successfully');
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.WriterNSQDConnection" id="apidoc.module.nsqjs.WriterNSQDConnection">module nsqjs.WriterNSQDConnection</a></h1>
+
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.WriterNSQDConnection.WriterNSQDConnection" id="apidoc.element.nsqjs.WriterNSQDConnection.WriterNSQDConnection">
+        function <span class="apidocSignatureSpan">nsqjs.</span>WriterNSQDConnection
+        <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function WriterNSQDConnection(nsqdHost, nsqdPort, options) {
+  if (options == null) {
+    options = {};
+  }
+  WriterNSQDConnection.__super__.constructor.call(this, nsqdHost, nsqdPort, null, null, options);
+  this.debug = Debug("nsqjs:writer:conn:" + nsqdHost + "/" + nsqdPort);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.WriterNSQDConnection.EventEmitter" id="apidoc.element.nsqjs.WriterNSQDConnection.EventEmitter">
+        function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>EventEmitter
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function EventEmitter() {
+  EventEmitter.init.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.WriterNSQDConnection.init" id="apidoc.element.nsqjs.WriterNSQDConnection.init">
+        function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>init
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">init = function () {
+  this.domain = null;
+  if (EventEmitter.usingDomains) {
+    // if there is an active domain, then attach to it.
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
+      this.domain = domain.active;
+    }
+  }
+
+  if (!this._events || this._events === Object.getPrototypeOf(this)._events) {
+    this._events = new EventHandlers();
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.WriterNSQDConnection.listenerCount" id="apidoc.element.nsqjs.WriterNSQDConnection.listenerCount">
+        function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.</span>listenerCount
+        <span class="apidocSignatureSpan">(emitter, type)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.WriterNSQDConnection.prototype" id="apidoc.module.nsqjs.WriterNSQDConnection.prototype">module nsqjs.WriterNSQDConnection.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.WriterNSQDConnection.prototype.connectionState" id="apidoc.element.nsqjs.WriterNSQDConnection.prototype.connectionState">
+        function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.prototype.</span>connectionState
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">connectionState = function () {
+  return this.statemachine || new WriterConnectionState(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.WriterNSQDConnection.prototype.constructor" id="apidoc.element.nsqjs.WriterNSQDConnection.prototype.constructor">
+        function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.prototype.</span>constructor
+        <span class="apidocSignatureSpan">(nsqdHost, nsqdPort, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function WriterNSQDConnection(nsqdHost, nsqdPort, options) {
+  if (options == null) {
+    options = {};
+  }
+  WriterNSQDConnection.__super__.constructor.call(this, nsqdHost, nsqdPort, null, null, options);
+  this.debug = Debug("nsqjs:writer:conn:" + nsqdHost + "/" + nsqdPort);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.WriterNSQDConnection.prototype.produceMessages" id="apidoc.element.nsqjs.WriterNSQDConnection.prototype.produceMessages">
+        function <span class="apidocSignatureSpan">nsqjs.WriterNSQDConnection.prototype.</span>produceMessages
+        <span class="apidocSignatureSpan">(topic, msgs, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">produceMessages = function (topic, msgs, callback) {
+  return this.statemachine.raise('produceMessages', [topic, msgs, callback]);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.backofftimer" id="apidoc.module.nsqjs.backofftimer">module nsqjs.backofftimer</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.backofftimer.backofftimer" id="apidoc.element.nsqjs.backofftimer.backofftimer">
+        function <span class="apidocSignatureSpan">nsqjs.</span>backofftimer
+        <span class="apidocSignatureSpan">(minInterval, maxInterval, ratio, shortLength, longLength)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function BackoffTimer(minInterval, maxInterval, ratio, shortLength, longLength) {
+  var intervalDelta;
+  if (ratio == null) {
+    ratio = .25;
+  }
+  if (shortLength == null) {
+    shortLength = 10;
+  }
+  if (longLength == null) {
+    longLength = 250;
+  }
+  this.minInterval = decimal(minInterval);
+  this.maxInterval = decimal(maxInterval);
+  ratio = decimal(ratio);
+  intervalDelta = decimal(this.maxInterval - this.minInterval);
+  this.maxShortTimer = intervalDelta.times(ratio);
+  this.maxLongTimer = intervalDelta.times(decimal(1).minus(ratio));
+  this.shortUnit = this.maxShortTimer.dividedBy(shortLength);
+  this.longUnit = this.maxLongTimer.dividedBy(longLength);
+  this.shortInterval = decimal(0);
+  this.longInterval = decimal(0);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.backofftimer.prototype" id="apidoc.module.nsqjs.backofftimer.prototype">module nsqjs.backofftimer.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.backofftimer.prototype.failure" id="apidoc.element.nsqjs.backofftimer.prototype.failure">
+        function <span class="apidocSignatureSpan">nsqjs.backofftimer.prototype.</span>failure
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">failure = function () {
+  this.shortInterval = this.shortInterval.plus(this.shortUnit);
+  this.longInterval = this.longInterval.plus(this.longUnit);
+  this.shortInterval = min(this.shortInterval, this.maxShortTimer);
+  return this.longInterval = min(this.longInterval, this.maxLongTimer);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  pause: function() {
+    return this.goto('PAUSE');
+  },
+  unpause: function() {}
+},
+BACKOFF: {
+  Enter: function() {
+    this.backoffTimer.<span class="apidocCodeKeywordSpan">failure</span>();
+    return this.backoff();
+  },
+  backoff: function() {
+    this.backoffTimer.failure();
+    return this.backoff();
+  },
+  success: function() {},
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.backofftimer.prototype.getInterval" id="apidoc.element.nsqjs.backofftimer.prototype.getInterval">
+        function <span class="apidocSignatureSpan">nsqjs.backofftimer.prototype.</span>getInterval
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getInterval = function () {
+  return this.minInterval.plus(this.shortInterval.plus(this.longInterval));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  }
+  onTimeout = (function(_this) {
+    return function() {
+      _this.log('Backoff done');
+      return _this.raise('try');
+    };
+  })(this);
+  delay = new Number(this.backoffTimer.<span class="apidocCodeKeywordSpan">getInterval</span>().valueOf()) * 1000;
+  this.backoffId = setTimeout(onTimeout, delay);
+  return this.log("Backoff for " + delay);
+};
+
+ReaderRdy.prototype.inFlight = function() {
+  var add;
+  add = function(previous, conn) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.backofftimer.prototype.success" id="apidoc.element.nsqjs.backofftimer.prototype.success">
+        function <span class="apidocSignatureSpan">nsqjs.backofftimer.prototype.</span>success
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">success = function () {
+  this.shortInterval = this.shortInterval.minus(this.shortUnit);
+  this.longInterval = this.longInterval.minus(this.longUnit);
+  this.shortInterval = max(this.shortInterval, decimal(0));
+  return this.longInterval = max(this.longInterval, decimal(0));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Enter: function() {
+  return this["try"]();
+},
+backoff: function() {
+  return this.goto('BACKOFF');
+},
+success: function(connectionRdy) {
+  this.backoffTimer.<span class="apidocCodeKeywordSpan">success</span>();
+  this.onMessageSuccess(connectionRdy);
+  return this.goto('MAX');
+},
+"try": function() {},
+pause: function() {
+  return this.goto('PAUSE');
+},
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.config" id="apidoc.module.nsqjs.config">module nsqjs.config</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.config.ConnectionConfig" id="apidoc.element.nsqjs.config.ConnectionConfig">
+        function <span class="apidocSignatureSpan">nsqjs.config.</span>ConnectionConfig
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function ConnectionConfig(options) {
+  if (options == null) {
+    options = {};
+  }
+  options = _.chain(options).pick(_.keys(this.constructor.DEFAULTS)).defaults(this.constructor.DEFAULTS).value();
+  _.extend(this, options);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.config.ReaderConfig" id="apidoc.element.nsqjs.config.ReaderConfig">
+        function <span class="apidocSignatureSpan">nsqjs.config.</span>ReaderConfig
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function ReaderConfig() {
+  return ReaderConfig.__super__.constructor.apply(this, arguments);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.framebuffer" id="apidoc.module.nsqjs.framebuffer">module nsqjs.framebuffer</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.framebuffer.framebuffer" id="apidoc.element.nsqjs.framebuffer.framebuffer">
+        function <span class="apidocSignatureSpan">nsqjs.</span>framebuffer
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function FrameBuffer() {}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.framebuffer.prototype" id="apidoc.module.nsqjs.framebuffer.prototype">module nsqjs.framebuffer.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.framebuffer.prototype.consume" id="apidoc.element.nsqjs.framebuffer.prototype.consume">
+        function <span class="apidocSignatureSpan">nsqjs.framebuffer.prototype.</span>consume
+        <span class="apidocSignatureSpan">(raw)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">consume = function (raw) {
+  return this.buffer = Buffer.concat(_.compact([this.buffer, raw]));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.framebuffer.prototype.frameSize" id="apidoc.element.nsqjs.framebuffer.prototype.frameSize">
+        function <span class="apidocSignatureSpan">nsqjs.framebuffer.prototype.</span>frameSize
+        <span class="apidocSignatureSpan">(offset)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">frameSize = function (offset) {
+  if (!(this.buffer &amp;&amp; this.buffer.length &gt; 4)) {
+    return;
+  }
+  if (offset + 4 &lt;= this.buffer.length) {
+    return 4 + this.buffer.readInt32BE(offset);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+};
+
+FrameBuffer.prototype.nextFrame = function() {
+  var frame, nextOffset;
+  if (!this.buffer) {
+    return;
+  }
+  if (!(this.<span class="apidocCodeKeywordSpan">frameSize</span>(0) &amp;&amp; this.frameSize(0) &lt;= this.buffer.length)) {
+    return;
+  }
+  frame = this.pluckFrame();
+  nextOffset = this.nextOffset();
+  this.buffer = this.buffer.slice(nextOffset);
+  if (!this.buffer.length) {
+    delete this.buffer;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.framebuffer.prototype.nextFrame" id="apidoc.element.nsqjs.framebuffer.prototype.nextFrame">
+        function <span class="apidocSignatureSpan">nsqjs.framebuffer.prototype.</span>nextFrame
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">nextFrame = function () {
+  var frame, nextOffset;
+  if (!this.buffer) {
+    return;
+  }
+  if (!(this.frameSize(0) &amp;&amp; this.frameSize(0) &lt;= this.buffer.length)) {
+    return;
+  }
+  frame = this.pluckFrame();
+  nextOffset = this.nextOffset();
+  this.buffer = this.buffer.slice(nextOffset);
+  if (!this.buffer.length) {
+    delete this.buffer;
+  }
+  return frame;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.framebuffer.prototype.nextOffset" id="apidoc.element.nsqjs.framebuffer.prototype.nextOffset">
+        function <span class="apidocSignatureSpan">nsqjs.framebuffer.prototype.</span>nextOffset
+        <span class="apidocSignatureSpan">(offset)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">nextOffset = function (offset) {
+  var size;
+  if (offset == null) {
+    offset = 0;
+  }
+  size = this.frameSize(offset);
+  if (size) {
+    return offset + size;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  if (!this.buffer) {
+    return;
+  }
+  if (!(this.frameSize(0) &amp;&amp; this.frameSize(0) &lt;= this.buffer.length)) {
+    return;
+  }
+  frame = this.pluckFrame();
+  nextOffset = this.<span class="apidocCodeKeywordSpan">nextOffset</span>();
+  this.buffer = this.buffer.slice(nextOffset);
+  if (!this.buffer.length) {
+    delete this.buffer;
+  }
+  return frame;
+};
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.framebuffer.prototype.pluckFrame" id="apidoc.element.nsqjs.framebuffer.prototype.pluckFrame">
+        function <span class="apidocSignatureSpan">nsqjs.framebuffer.prototype.</span>pluckFrame
+        <span class="apidocSignatureSpan">(offset)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">pluckFrame = function (offset) {
+  var frame, frameId;
+  if (offset == null) {
+    offset = 0;
+  }
+  frame = this.buffer.slice(offset, offset + this.frameSize(offset));
+  frameId = frame.readInt32BE(4);
+  return [frameId, frame.slice(8)];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  var frame, nextOffset;
+  if (!this.buffer) {
+    return;
+  }
+  if (!(this.frameSize(0) &amp;&amp; this.frameSize(0) &lt;= this.buffer.length)) {
+    return;
+  }
+  frame = this.<span class="apidocCodeKeywordSpan">pluckFrame</span>();
+  nextOffset = this.nextOffset();
+  this.buffer = this.buffer.slice(nextOffset);
+  if (!this.buffer.length) {
+    delete this.buffer;
+  }
+  return frame;
+};
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.message" id="apidoc.module.nsqjs.message">module nsqjs.message</a></h1>
+
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.message" id="apidoc.element.nsqjs.message.message">
+        function <span class="apidocSignatureSpan">nsqjs.</span>message
+        <span class="apidocSignatureSpan">(id, timestamp, attempts, body, requeueDelay, msgTimeout, maxMsgTimeout)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Message(id, timestamp, attempts, body, requeueDelay, msgTimeout, maxMsgTimeout) {
+  var trackTimeout;
+  this.id = id;
+  this.timestamp = timestamp;
+  this.attempts = attempts;
+  this.body = body;
+  this.requeueDelay = requeueDelay;
+  this.msgTimeout = msgTimeout;
+  this.maxMsgTimeout = maxMsgTimeout;
+  this.hasResponded = false;
+  this.receivedOn = Date.now();
+  this.lastTouched = this.receivedOn;
+  this.touchCount = 0;
+  this.timedOut = false;
+  (trackTimeout = (function(_this) {
+    return function() {
+      var hard, soft;
+      if (_this.hasResponded) {
+        return;
+      }
+      soft = _this.timeUntilTimeout();
+      hard = _this.timeUntilTimeout(true);
+      _this.timedOut = !soft || !hard;
+      if (!_this.timedOut) {
+        return setTimeout(trackTimeout, Math.min(soft, hard));
+      }
+    };
+  })(this))();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.EventEmitter" id="apidoc.element.nsqjs.message.EventEmitter">
+        function <span class="apidocSignatureSpan">nsqjs.message.</span>EventEmitter
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function EventEmitter() {
+  EventEmitter.init.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.init" id="apidoc.element.nsqjs.message.init">
+        function <span class="apidocSignatureSpan">nsqjs.message.</span>init
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">init = function () {
+  this.domain = null;
+  if (EventEmitter.usingDomains) {
+    // if there is an active domain, then attach to it.
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
+      this.domain = domain.active;
+    }
+  }
+
+  if (!this._events || this._events === Object.getPrototypeOf(this)._events) {
+    this._events = new EventHandlers();
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.listenerCount" id="apidoc.element.nsqjs.message.listenerCount">
+        function <span class="apidocSignatureSpan">nsqjs.message.</span>listenerCount
+        <span class="apidocSignatureSpan">(emitter, type)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.message.prototype" id="apidoc.module.nsqjs.message.prototype">module nsqjs.message.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.prototype.constructor" id="apidoc.element.nsqjs.message.prototype.constructor">
+        function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>constructor
+        <span class="apidocSignatureSpan">(id, timestamp, attempts, body, requeueDelay, msgTimeout, maxMsgTimeout)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Message(id, timestamp, attempts, body, requeueDelay, msgTimeout, maxMsgTimeout) {
+  var trackTimeout;
+  this.id = id;
+  this.timestamp = timestamp;
+  this.attempts = attempts;
+  this.body = body;
+  this.requeueDelay = requeueDelay;
+  this.msgTimeout = msgTimeout;
+  this.maxMsgTimeout = maxMsgTimeout;
+  this.hasResponded = false;
+  this.receivedOn = Date.now();
+  this.lastTouched = this.receivedOn;
+  this.touchCount = 0;
+  this.timedOut = false;
+  (trackTimeout = (function(_this) {
+    return function() {
+      var hard, soft;
+      if (_this.hasResponded) {
+        return;
+      }
+      soft = _this.timeUntilTimeout();
+      hard = _this.timeUntilTimeout(true);
+      _this.timedOut = !soft || !hard;
+      if (!_this.timedOut) {
+        return setTimeout(trackTimeout, Math.min(soft, hard));
+      }
+    };
+  })(this))();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.prototype.finish" id="apidoc.element.nsqjs.message.prototype.finish">
+        function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>finish
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">finish = function () {
+  return this.respond(Message.FINISH, wire.finish(this.id));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  lookupdHTTPAddresses: '127.0.0.1:4161'
+});
+
+reader.connect();
+
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
+  msg.<span class="apidocCodeKeywordSpan">finish</span>();
+});
+```
+
+#### CoffeeScript
+```coffee-script
+nsq = require 'nsqjs'
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.prototype.json" id="apidoc.element.nsqjs.message.prototype.json">
+        function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>json
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">json = function () {
+  var err;
+  if (this.parsed == null) {
+    try {
+      this.parsed = JSON.parse(this.body);
+    } catch (error) {
+      err = error;
+      throw new Error("Invalid JSON in Message");
+    }
+  }
+  return this.parsed;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.prototype.requeue" id="apidoc.element.nsqjs.message.prototype.requeue">
+        function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>requeue
+        <span class="apidocSignatureSpan">(delay, backoff)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">requeue = function (delay, backoff) {
+  if (delay == null) {
+    delay = this.requeueDelay;
+  }
+  if (backoff == null) {
+    backoff = true;
+  }
+  this.respond(Message.REQUEUE, wire.requeue(this.id, delay));
+  if (backoff) {
+    return this.emit(Message.BACKOFF);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Message.prototype.requeue = function(delay, backoff) {
+  if (delay == null) {
+    delay = this.requeueDelay;
+  }
+  if (backoff == null) {
+    backoff = true;
+  }
+  this.respond(Message.REQUEUE, wire.<span class="apidocCodeKeywordSpan">requeue</span>(this.id, delay));
+  if (backoff) {
+    return this.emit(Message.BACKOFF);
+  }
+};
+
+Message.prototype.touch = function() {
+  this.touchCount += 1;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.prototype.respond" id="apidoc.element.nsqjs.message.prototype.respond">
+        function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>respond
+        <span class="apidocSignatureSpan">(responseType, wireData)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">respond = function (responseType, wireData) {
+  if (this.hasResponded) {
+    return;
+  }
+  return process.nextTick((function(_this) {
+    return function() {
+      if (responseType !== Message.TOUCH) {
+        _this.hasResponded = true;
+      } else {
+        _this.lastTouched = Date.now();
+      }
+      return _this.emit(Message.RESPOND, responseType, wireData);
+    };
+  })(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    return delta;
+  } else {
+    return null;
+  }
+};
+
+Message.prototype.finish = function() {
+  return this.<span class="apidocCodeKeywordSpan">respond</span>(Message.FINISH, wire.finish(this.id));
+};
+
+Message.prototype.requeue = function(delay, backoff) {
+  if (delay == null) {
+    delay = this.requeueDelay;
+  }
+  if (backoff == null) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.prototype.timeUntilTimeout" id="apidoc.element.nsqjs.message.prototype.timeUntilTimeout">
+        function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>timeUntilTimeout
+        <span class="apidocSignatureSpan">(hard)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">timeUntilTimeout = function (hard) {
+  var delta;
+  if (hard == null) {
+    hard = false;
+  }
+  if (this.hasResponded) {
+    return null;
+  }
+  delta = hard ? this.receivedOn + this.maxMsgTimeout - Date.now() : this.lastTouched + this.msgTimeout - Date.now();
+  if (delta &gt; 0) {
+    return delta;
+  } else {
+    return null;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+console.log('Received message [%s]', msg.id);
+
+function touch() {
+  if (!msg.hasResponded) {
+    console.log('Touch [%s]', msg.id);
+    msg.touch();
+    // Touch the message again a second before the next timeout.
+    setTimeout(touch, msg.<span class="apidocCodeKeywordSpan">timeUntilTimeout</span>() - 1000);
+  }
+}
+
+function finish() {
+  console.log('Finished message [%s]: %s', msg.id, msg.body.toString());
+  msg.finish();
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.message.prototype.touch" id="apidoc.element.nsqjs.message.prototype.touch">
+        function <span class="apidocSignatureSpan">nsqjs.message.prototype.</span>touch
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">touch = function () {
+  this.touchCount += 1;
+  this.lastTouched = Date.now();
+  return this.respond(Message.TOUCH, wire.touch(this.id));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+reader.on('message', function (msg) {
+console.log('Received message [%s]', msg.id);
+
+function touch() {
+  if (!msg.hasResponded) {
+    console.log('Touch [%s]', msg.id);
+    msg.<span class="apidocCodeKeywordSpan">touch</span>();
+    // Touch the message again a second before the next timeout.
+    setTimeout(touch, msg.timeUntilTimeout() - 1000);
+  }
+}
+
+function finish() {
+  console.log('Finished message [%s]: %s', msg.id, msg.body.toString());
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.readerrdy" id="apidoc.module.nsqjs.readerrdy">module nsqjs.readerrdy</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.readerrdy.ConnectionRdy" id="apidoc.element.nsqjs.readerrdy.ConnectionRdy">
+        function <span class="apidocSignatureSpan">nsqjs.readerrdy.</span>ConnectionRdy
+        <span class="apidocSignatureSpan">(conn1)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function ConnectionRdy(conn1) {
+  var connId, readerId;
+  this.conn = conn1;
+  readerId = this.conn.topic + "/" + this.conn.channel;
+  connId = "" + (this.conn.id().replace(':', '/'));
+  this.debug = Debug("nsqjs:reader:" + readerId + ":rdy:conn:" + connId);
+  this.maxConnRdy = 0;
+  this.inFlight = 0;
+  this.lastRdySent = 0;
+  this.availableRdy = 0;
+  this.statemachine = new ConnectionRdyState(this);
+  this.conn.on(NSQDConnection.ERROR, (function(_this) {
+    return function(err) {
+      return _this.log(err);
+    };
+  })(this));
+  this.conn.on(NSQDConnection.MESSAGE, (function(_this) {
+    return function() {
+      if (_this.idleId != null) {
+        clearTimeout(_this.idleId);
+      }
+      _this.idleId = null;
+      _this.inFlight += 1;
+      return _this.availableRdy -= 1;
+    };
+  })(this));
+  this.conn.on(NSQDConnection.FINISHED, (function(_this) {
+    return function() {
+      return _this.inFlight -= 1;
+    };
+  })(this));
+  this.conn.on(NSQDConnection.REQUEUED, (function(_this) {
+    return function() {
+      return _this.inFlight -= 1;
+    };
+  })(this));
+  this.conn.on(NSQDConnection.READY, (function(_this) {
+    return function() {
+      return _this.start();
+    };
+  })(this));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.readerrdy.ReaderRdy" id="apidoc.element.nsqjs.readerrdy.ReaderRdy">
+        function <span class="apidocSignatureSpan">nsqjs.readerrdy.</span>ReaderRdy
+        <span class="apidocSignatureSpan">(maxInFlight, maxBackoffDuration, readerId1, lowRdyTimeout)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function ReaderRdy(maxInFlight, maxBackoffDuration, readerId1, lowRdyTimeout) {
+  this.maxInFlight = maxInFlight;
+  this.maxBackoffDuration = maxBackoffDuration;
+  this.readerId = readerId1;
+  this.lowRdyTimeout = lowRdyTimeout != null ? lowRdyTimeout : 1.5;
+  this.debug = Debug("nsqjs:reader:" + this.readerId + ":rdy");
+  ReaderRdy.__super__.constructor.call(this, {
+    autostart: true,
+    initial_state: 'ZERO',
+    sync_goto: true
+  });
+  this.id = ReaderRdy.getId();
+  this.backoffTimer = new BackoffTimer(0, this.maxBackoffDuration);
+  this.backoffId = null;
+  this.balanceId = null;
+  this.connections = [];
+  this.roundRobinConnections = new RoundRobinList([]);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.roundrobinlist" id="apidoc.module.nsqjs.roundrobinlist">module nsqjs.roundrobinlist</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.roundrobinlist.roundrobinlist" id="apidoc.element.nsqjs.roundrobinlist.roundrobinlist">
+        function <span class="apidocSignatureSpan">nsqjs.</span>roundrobinlist
+        <span class="apidocSignatureSpan">(lst)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function RoundRobinList(lst) {
+  this.lst = lst.slice(0);
+  this.index = 0;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.roundrobinlist.prototype" id="apidoc.module.nsqjs.roundrobinlist.prototype">module nsqjs.roundrobinlist.prototype</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.roundrobinlist.prototype.add" id="apidoc.element.nsqjs.roundrobinlist.prototype.add">
+        function <span class="apidocSignatureSpan">nsqjs.roundrobinlist.prototype.</span>add
+        <span class="apidocSignatureSpan">(item)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">add = function (item) {
+  return this.lst.push(item);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    return _this.raise('backoff');
+  };
+})(this));
+return connectionRdy.on(ConnectionRdy.READY, (function(_this) {
+  return function() {
+    var ref;
+    _this.connections.push(connectionRdy);
+    _this.roundRobinConnections.<span class="apidocCodeKeywordSpan">add</span>(connectionRdy);
+    _this.balance();
+    if (_this.current_state_name === 'ZERO') {
+      return _this.goto('MAX');
+    } else if ((ref = _this.current_state_name) === 'TRY_ONE' || ref === 'MAX') {
+      return connectionRdy.bump();
+    }
+  };
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.roundrobinlist.prototype.length" id="apidoc.element.nsqjs.roundrobinlist.prototype.length">
+        function <span class="apidocSignatureSpan">nsqjs.roundrobinlist.prototype.</span>length
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">length = function () {
+  return this.lst.length;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.roundrobinlist.prototype.next" id="apidoc.element.nsqjs.roundrobinlist.prototype.next">
+        function <span class="apidocSignatureSpan">nsqjs.roundrobinlist.prototype.</span>next
+        <span class="apidocSignatureSpan">(count)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">next = function (count) {
+  var index;
+  if (count == null) {
+    count = 1;
+  }
+  index = this.index;
+  this.index = (this.index + count) % this.lst.length;
+  return this.lst.slice(index, index + count);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+perConnectionMax = Math.floor(max / this.connections.length);
+if (perConnectionMax === 0) {
+  ref = this.connections;
+  for (i = 0, len = ref.length; i &lt; len; i++) {
+    c = ref[i];
+    c.backoff();
+  }
+  ref1 = this.roundRobinConnections.<span class="apidocCodeKeywordSpan">next</span>(max - this.inFlight());
+  for (j = 0, len1 = ref1.length; j &lt; len1; j++) {
+    c = ref1[j];
+    c.setConnectionRdyMax(1);
+    c.bump();
+  }
+  return this.balanceId = setTimeout(this.balance.bind(this), this.lowRdyTimeout * 1000);
+} else {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.roundrobinlist.prototype.remove" id="apidoc.element.nsqjs.roundrobinlist.prototype.remove">
+        function <span class="apidocSignatureSpan">nsqjs.roundrobinlist.prototype.</span>remove
+        <span class="apidocSignatureSpan">(item)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">remove = function (item) {
+  var itemIndex;
+  itemIndex = this.lst.indexOf(item);
+  if (itemIndex === -1) {
+    return;
+  }
+  if (this.index &gt; itemIndex) {
+    this.index -= 1;
+  }
+  return this.lst.splice(itemIndex, 1);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+      }
+    };
+  })(this));
+};
+
+ReaderRdy.prototype.removeConnection = function(conn) {
+  this.connections.splice(this.connections.indexOf(conn), 1);
+  this.roundRobinConnections.<span class="apidocCodeKeywordSpan">remove</span>(conn);
+  if (this.connections.length === 0) {
+    return this.goto('ZERO');
+  }
+};
+
+ReaderRdy.prototype.bump = function() {
+  var conn, i, len, ref, results;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.nsqjs.wire" id="apidoc.module.nsqjs.wire">module nsqjs.wire</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.auth" id="apidoc.element.nsqjs.wire.auth">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>auth
+        <span class="apidocSignatureSpan">(token)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">auth = function (token) {
+  return command('AUTH', token);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.finish" id="apidoc.element.nsqjs.wire.finish">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>finish
+        <span class="apidocSignatureSpan">(id)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">finish = function (id) {
+  if (!(Buffer.byteLength(id) &lt;= 16)) {
+    throw new Error("FINISH invalid id (" + id + ")");
+  }
+  return command('FIN', null, id);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  lookupdHTTPAddresses: '127.0.0.1:4161'
+});
+
+reader.connect();
+
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
+  msg.<span class="apidocCodeKeywordSpan">finish</span>();
+});
+```
+
+#### CoffeeScript
+```coffee-script
+nsq = require 'nsqjs'
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.identify" id="apidoc.element.nsqjs.wire.identify">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>identify
+        <span class="apidocSignatureSpan">(data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">identify = function (data) {
+  var unexpectedKeys, validIdentifyKeys;
+  validIdentifyKeys = ['client_id', 'deflate', 'deflate_level', 'feature_negotiation', 'heartbeat_interval', 'long_id', 'msg_timeout
+', 'output_buffer_size', 'output_buffer_timeout', 'sample_rate', 'short_id', 'snappy', 'tls_v1', 'user_agent'];
+  unexpectedKeys = _.filter(_.keys(data), function(k) {
+    return indexOf.call(validIdentifyKeys, k) &lt; 0;
+  });
+  if (unexpectedKeys.length) {
+    throw new Error("Unexpected IDENTIFY keys: " + unexpectedKeys);
+  }
+  return command('IDENTIFY', JSON_stringify(data));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.mpub" id="apidoc.element.nsqjs.wire.mpub">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>mpub
+        <span class="apidocSignatureSpan">(topic, data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">mpub = function (topic, data) {
+  var messages, numMessagesBuffer;
+  if (!_.isArray(data)) {
+    throw new Error("MPUB requires an array of message");
+  }
+  messages = _.map(data, function(message) {
+    var buffer;
+    buffer = new Buffer(4 + byteLength(message));
+    buffer.writeInt32BE(byteLength(message), 0);
+    if (_.isString(message)) {
+      buffer.write(message, 4);
+    } else {
+      message.copy(buffer, 4, 0, buffer.length);
+    }
+    return buffer;
+  });
+  numMessagesBuffer = Buffer(4);
+  numMessagesBuffer.writeInt32BE(messages.length, 0);
+  messages.unshift(numMessagesBuffer);
+  return command('MPUB', Buffer.concat(messages), topic);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.nop" id="apidoc.element.nsqjs.wire.nop">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>nop
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">nop = function () {
+  return command('NOP', null);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.pub" id="apidoc.element.nsqjs.wire.pub">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>pub
+        <span class="apidocSignatureSpan">(topic, data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">pub = function (topic, data) {
+  return command('PUB', data, topic);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.ready" id="apidoc.element.nsqjs.wire.ready">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>ready
+        <span class="apidocSignatureSpan">(count)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">ready = function (count) {
+  if (!_.isNumber(count)) {
+    throw new Error("RDY count (" + count + ") is not a number");
+  }
+  if (!(count &gt;= 0)) {
+    throw new Error("RDY count (" + count + ") is not positive");
+  }
+  return command('RDY', null, count.toString());
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.requeue" id="apidoc.element.nsqjs.wire.requeue">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>requeue
+        <span class="apidocSignatureSpan">(id, timeMs)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">requeue = function (id, timeMs) {
+  var parameters;
+  if (timeMs == null) {
+    timeMs = 0;
+  }
+  if (!(Buffer.byteLength(id) &lt;= 16)) {
+    throw new Error("REQUEUE invalid id (" + id + ")");
+  }
+  if (!_.isNumber(timeMs)) {
+    throw new Error("REQUEUE delay time is invalid (" + timeMs + ")");
+  }
+  parameters = ['REQ', null, id, timeMs];
+  return command.apply(null, parameters);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Message.prototype.requeue = function(delay, backoff) {
+  if (delay == null) {
+    delay = this.requeueDelay;
+  }
+  if (backoff == null) {
+    backoff = true;
+  }
+  this.respond(Message.REQUEUE, wire.<span class="apidocCodeKeywordSpan">requeue</span>(this.id, delay));
+  if (backoff) {
+    return this.emit(Message.BACKOFF);
+  }
+};
+
+Message.prototype.touch = function() {
+  this.touchCount += 1;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.subscribe" id="apidoc.element.nsqjs.wire.subscribe">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>subscribe
+        <span class="apidocSignatureSpan">(topic, channel)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">subscribe = function (topic, channel) {
+  if (!validTopicName(topic)) {
+    throw new Error("Invalid topic: " + topic);
+  }
+  if (!validChannelName(channel)) {
+    throw new Error("Invalid channel: " + channel);
+  }
+  return command('SUB', null, topic, channel);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.touch" id="apidoc.element.nsqjs.wire.touch">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>touch
+        <span class="apidocSignatureSpan">(id)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">touch = function (id) {
+  return command('TOUCH', null, id);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+reader.on('message', function (msg) {
+console.log('Received message [%s]', msg.id);
+
+function touch() {
+  if (!msg.hasResponded) {
+    console.log('Touch [%s]', msg.id);
+    msg.<span class="apidocCodeKeywordSpan">touch</span>();
+    // Touch the message again a second before the next timeout.
+    setTimeout(touch, msg.timeUntilTimeout() - 1000);
+  }
+}
+
+function finish() {
+  console.log('Finished message [%s]: %s', msg.id, msg.body.toString());
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.nsqjs.wire.unpackMessage" id="apidoc.element.nsqjs.wire.unpackMessage">
+        function <span class="apidocSignatureSpan">nsqjs.wire.</span>unpackMessage
+        <span class="apidocSignatureSpan">(data)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">unpackMessage = function (data) {
+  var attempts, body, id, timestamp;
+  timestamp = (new Int64(data, 0)).toOctetString();
+  timestamp = new BigNumber(timestamp, 16);
+  attempts = data.readInt16BE(8);
+  id = data.slice(10, 26).toString();
+  body = data.slice(26);
+  return [id, timestamp, attempts, body];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
