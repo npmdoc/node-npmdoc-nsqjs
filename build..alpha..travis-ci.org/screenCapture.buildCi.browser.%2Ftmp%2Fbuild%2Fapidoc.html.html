@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/dudleycarr/nsqjs"
-
-    >nsqjs (v0.8.4)</a>
+    <a href="https://github.com/dudleycarr/nsqjs">nsqjs (v0.8.4)</a>
 </h1>
 <h4>NodeJS client for NSQ</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.nsqjs">module nsqjs</a><ol>
 
@@ -2176,8 +2169,8 @@
     options = {};
   }
   NSQDConnection.__super__.constructor.apply(this, arguments);
-  connId = this.id().replace(&#x27;:&#x27;, &#x27;/&#x27;);
-  this.debug = Debug(&#x22;nsqjs:reader:&#x22; + this.topic + &#x22;/&#x22; + this.channel + &#x22;:conn:&#x22; + connId);
+  connId = this.id().replace(':', '/');
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel + ":conn:" + connId);
   this.config = new ConnectionConfig(options);
   this.config.validate();
   this.frameBuffer = new FrameBuffer();
@@ -2208,8 +2201,8 @@
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -2234,7 +2227,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">NSQDConnection.listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -2269,11 +2262,11 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">NSQDConnection.prototype.connect = function () {
-  this.statemachine.raise(&#x27;connecting&#x27;);
+  this.statemachine.raise('connecting');
   return process.nextTick((function(_this) {
     return function() {
       _this.conn = net.connect(_this.nsqdPort, _this.nsqdHost, function() {
-        _this.statemachine.raise(&#x27;connected&#x27;);
+        _this.statemachine.raise('connected');
         _this.emit(NSQDConnection.CONNECTED);
         return _this.identifyTimeoutId = setTimeout(_this.identifyTimeout.bind(_this), 5000);
       });
@@ -2316,16 +2309,16 @@
     var child = new ctor, result = func.apply(child, args);
     return Object(result) === result ? result : child;
   })(Message, slice.call(msgComponents).concat([this.config.requeueDelay], [this.msgTimeout], [this.maxMsgTimeout]), function(){});
-  this.debug(&#x22;Received message [&#x22; + msg.id + &#x22;] [attempts: &#x22; + msg.attempts + &#x22;]&#x22;);
+  this.debug("Received message [" + msg.id + "] [attempts: " + msg.attempts + "]");
   msg.on(Message.RESPOND, (function(_this) {
     return function(responseType, wireData) {
       _this.write(wireData);
       if (responseType === Message.FINISH) {
-        _this.debug(&#x22;Finished message [&#x22; + msg.id + &#x22;] [timedout=&#x22; + (msg.timedout === true) + &#x22;, elapsed=&#x22; + (Date.now() - msg.
-receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
+        _this.debug("Finished message [" + msg.id + "] [timedout=" + (msg.timedout === true) + ", elapsed=" + (Date.now() - msg.
+receivedOn) + "ms, touch_count=" + msg.touchCount + "]");
         return _this.emit(NSQDConnection.FINISHED);
       } else if (responseType === Message.REQUEUE) {
-        _this.debug(&#x22;Requeued message [&#x22; + msg.id + &#x22;]&#x22;);
+        _this.debug("Requeued message [" + msg.id + "]");
         return _this.emit(NSQDConnection.REQUEUED);
       }
     };
@@ -2365,7 +2358,7 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">NSQDConnection.prototype.id = function () {
-  return this.nsqdHost + &#x22;:&#x22; + this.nsqdPort;
+  return this.nsqdHost + ":" + this.nsqdPort;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2382,7 +2375,7 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
     <li>description and source-code<pre class="apidocCodePre">NSQDConnection.prototype.identify = function () {
   var i, identify, key, len, longName, removableKeys, shortName;
   longName = os.hostname();
-  shortName = longName.split(&#x27;.&#x27;)[0];
+  shortName = longName.split('.')[0];
   identify = {
     client_id: this.config.clientId || shortName,
     deflate: this.config.deflate,
@@ -2397,10 +2390,10 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
     short_id: shortName,
     snappy: this.config.snappy,
     tls_v1: this.config.tls,
-    user_agent: &#x22;nsqjs/&#x22; + version
+    user_agent: "nsqjs/" + version
   };
-  removableKeys = [&#x27;msg_timeout&#x27;, &#x27;output_buffer_size&#x27;, &#x27;output_buffer_timeout&#x27;, &#x27;sample_rate&#x27;];
-  for (i = 0, len = removableKeys.length; i &#x3c; len; i++) {
+  removableKeys = ['msg_timeout', 'output_buffer_size', 'output_buffer_timeout', 'sample_rate'];
+  for (i = 0, len = removableKeys.length; i &lt; len; i++) {
     key = removableKeys[i];
     if (identify[key] === null) {
       delete identify[key];
@@ -2421,7 +2414,7 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">NSQDConnection.prototype.identifyTimeout = function () {
-  return this.statemachine.goto(&#x27;ERROR&#x27;, new Error(&#x27;Timed out identifying with nsqd&#x27;));
+  return this.statemachine.goto('ERROR', new Error('Timed out identifying with nsqd'));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2444,14 +2437,14 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
     frameId = frame[0], payload = frame[1];
     switch (frameId) {
       case wire.FRAME_TYPE_RESPONSE:
-        results.push(this.statemachine.raise(&#x27;response&#x27;, payload));
+        results.push(this.statemachine.raise('response', payload));
         break;
       case wire.FRAME_TYPE_ERROR:
-        results.push(this.statemachine.goto(&#x27;ERROR&#x27;, new Error(payload.toString())));
+        results.push(this.statemachine.goto('ERROR', new Error(payload.toString())));
         break;
       case wire.FRAME_TYPE_MESSAGE:
         this.lastMessageTimestamp = this.lastReceivedTimestamp;
-        results.push(this.statemachine.raise(&#x27;consumeMessage&#x27;, this.createMessage(payload)));
+        results.push(this.statemachine.raise('consumeMessage', this.createMessage(payload)));
         break;
       default:
         results.push(void 0);
@@ -2500,7 +2493,7 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
     <ul>
     <li>description and source-code<pre class="apidocCodePre">NSQDConnection.prototype.reconsumeFrameBuffer = function () {
   var data;
-  if (this.frameBuffer.buffer &#x26;&#x26; this.frameBuffer.buffer.length) {
+  if (this.frameBuffer.buffer &amp;&amp; this.frameBuffer.buffer.length) {
     data = this.frameBuffer.buffer;
     delete this.frameBuffer.buffer;
     return this.receiveRawData(data);
@@ -2519,20 +2512,20 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">NSQDConnection.prototype.registerStreamListeners = function (conn) {
-  conn.on(&#x27;data&#x27;, (function(_this) {
+  conn.on('data', (function(_this) {
     return function(data) {
       return _this.receiveRawData(data);
     };
   })(this));
-  conn.on(&#x27;error&#x27;, (function(_this) {
+  conn.on('error', (function(_this) {
     return function(err) {
-      _this.statemachine.goto(&#x27;CLOSED&#x27;);
-      return _this.emit(&#x27;connection_error&#x27;, err);
+      _this.statemachine.goto('CLOSED');
+      return _this.emit('connection_error', err);
     };
   })(this));
-  return conn.on(&#x27;close&#x27;, (function(_this) {
+  return conn.on('close', (function(_this) {
     return function(err) {
-      return _this.statemachine.raise(&#x27;close&#x27;);
+      return _this.statemachine.raise('close');
     };
   })(this));
 }</pre></li>
@@ -2549,7 +2542,7 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">NSQDConnection.prototype.setRdy = function (rdyCount) {
-  return this.statemachine.raise(&#x27;ready&#x27;, rdyCount);
+  return this.statemachine.raise('ready', rdyCount);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2604,8 +2597,8 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
     <ul>
     <li>description and source-code<pre class="apidocCodePre">NSQDConnection.prototype.startTLS = function (callback) {
   var event, i, len, options, ref1, tlsConn;
-  ref1 = [&#x27;data&#x27;, &#x27;error&#x27;, &#x27;close&#x27;];
-  for (i = 0, len = ref1.length; i &#x3c; len; i++) {
+  ref1 = ['data', 'error', 'close'];
+  for (i = 0, len = ref1.length; i &lt; len; i++) {
     event = ref1[i];
     this.conn.removeAllListeners(event);
   }
@@ -2616,7 +2609,7 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
   tlsConn = tls.connect(options, (function(_this) {
     return function() {
       _this.conn = tlsConn;
-      return typeof callback === &#x22;function&#x22; ? callback() : void 0;
+      return typeof callback === "function" ? callback() : void 0;
     };
   })(this));
   return this.registerStreamListeners(tlsConn);
@@ -2659,32 +2652,32 @@ receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
     <li>description and source-code<pre class="apidocCodePre">function Reader(topic, channel, options) {
   this.topic = topic;
   this.channel = channel;
-  this.debug = Debug(&#x22;nsqjs:reader:&#x22; + this.topic + &#x22;/&#x22; + this.channel);
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel);
   this.config = new ReaderConfig(options);
   this.config.validate();
-  this.debug(&#x27;Configuration&#x27;);
+  this.debug('Configuration');
   this.debug(this.config);
   this.roundrobinLookupd = new RoundRobinList(this.config.lookupdHTTPAddresses);
-  this.readerRdy = new ReaderRdy(this.config.maxInFlight, this.config.maxBackoffDuration, this.topic + &#x22;/&#x22; + this.channel);
+  this.readerRdy = new ReaderRdy(this.config.maxInFlight, this.config.maxBackoffDuration, this.topic + "/" + this.channel);
   this.connectIntervalId = null;
   this.connectionIds = [];
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-$ nsqd --lookupd-tcp-address=127.0.0.1:4160 &#x26;
+$ nsqd --lookupd-tcp-address=127.0.0.1:4160 &amp;
 ```
 
 #### JavaScript
 ```js
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var reader = new nsq.<span class="apidocCodeKeywordSpan">Reader</span>(&#x27;sample_topic&#x27;, &#x27;test_channel&#x27;, {
-lookupdHTTPAddresses: &#x27;127.0.0.1:4161&#x27;
+var reader = new nsq.<span class="apidocCodeKeywordSpan">Reader</span>('sample_topic', 'test_channel', {
+lookupdHTTPAddresses: '127.0.0.1:4161'
 });
 
 reader.connect();
 
-reader.on(&#x27;message&#x27;, function (msg) {
-console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
+reader.on('message', function (msg) {
+console.log('Received message [%s]: %s', msg.id, msg.body.toString());
 ...</pre></li>
     </ul>
 
@@ -2724,12 +2717,12 @@ console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
         if (_this.isPaused()) {
           return;
         }
-        if (_this.connectionIds.length &#x3c; _this.config.nsqdTCPAddresses.length) {
+        if (_this.connectionIds.length &lt; _this.config.nsqdTCPAddresses.length) {
           ref = _this.config.nsqdTCPAddresses;
           results = [];
-          for (i = 0, len = ref.length; i &#x3c; len; i++) {
+          for (i = 0, len = ref.length; i &lt; len; i++) {
             addr = ref[i];
-            ref1 = addr.split(&#x27;:&#x27;), address = ref1[0], port = ref1[1];
+            ref1 = addr.split(':'), address = ref1[0], port = ref1[1];
             results.push(_this.connectToNSQD(address, Number(port)));
           }
           return results;
@@ -2767,12 +2760,12 @@ console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Reader.prototype.connectToNSQD = function (host, port) {
   var conn;
-  this.debug(&#x22;discovered &#x22; + host + &#x22;:&#x22; + port + &#x22; for &#x22; + this.topic + &#x22; topic&#x22;);
+  this.debug("discovered " + host + ":" + port + " for " + this.topic + " topic");
   conn = new NSQDConnection(host, port, this.topic, this.channel, this.config);
   if (this.connectionIds.indexOf(conn.id()) !== -1) {
     return;
   }
-  this.debug(&#x22;connecting to &#x22; + host + &#x22;:&#x22; + port);
+  this.debug("connecting to " + host + ":" + port);
   this.connectionIds.push(conn.id());
   this.registerConnectionListeners(conn);
   this.readerRdy.addConnection(conn);
@@ -2794,9 +2787,9 @@ console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
   return process.nextTick((function(_this) {
     return function() {
       var autoFinishMessage, numDiscardListeners, ref;
-      autoFinishMessage = (0 &#x3c; (ref = _this.config.maxAttempts) &#x26;&#x26; ref &#x3c;= message.attempts);
+      autoFinishMessage = (0 &lt; (ref = _this.config.maxAttempts) &amp;&amp; ref &lt;= message.attempts);
       numDiscardListeners = _this.listeners(Reader.DISCARD).length;
-      if (autoFinishMessage &#x26;&#x26; numDiscardListeners &#x3e; 0) {
+      if (autoFinishMessage &amp;&amp; numDiscardListeners &gt; 0) {
         _this.emit(Reader.DISCARD, message);
       } else {
         _this.emit(Reader.MESSAGE, message);
@@ -2835,7 +2828,7 @@ console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Reader.prototype.pause = function () {
-  this.debug(&#x27;pause&#x27;);
+  this.debug('pause');
   return this.readerRdy.pause();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -2861,7 +2854,7 @@ console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
       var i, len, n, results;
       if (!err) {
         results = [];
-        for (i = 0, len = nodes.length; i &#x3c; len; i++) {
+        for (i = 0, len = nodes.length; i &lt; len; i++) {
           n = nodes[i];
           results.push(_this.connectToNSQD(n.broadcast_address, n.tcp_port));
         }
@@ -2934,7 +2927,7 @@ console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Reader.prototype.unpause = function () {
-  this.debug(&#x27;unpause&#x27;);
+  this.debug('unpause');
   return this.readerRdy.unpause();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -2954,11 +2947,11 @@ console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
   this.nsqdPort = nsqdPort;
   Writer.__super__.constructor.apply(this, arguments);
   this.setMaxListeners(10000);
-  this.debug = Debug(&#x22;nsqjs:writer:&#x22; + this.nsqdHost + &#x22;/&#x22; + this.nsqdPort);
+  this.debug = Debug("nsqjs:writer:" + this.nsqdHost + "/" + this.nsqdPort);
   this.config = new ConnectionConfig(options);
   this.config.validate();
   this.ready = false;
-  this.debug(&#x27;Configuration&#x27;);
+  this.debug('Configuration');
   this.debug(this.config);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
@@ -2967,16 +2960,16 @@ The writer sends a single message and then a list of messages.
 
 #### JavaScript
 ```js
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var w = new nsq.<span class="apidocCodeKeywordSpan">Writer</span>(&#x27;127.0.0.1&#x27;, 4150);
+var w = new nsq.<span class="apidocCodeKeywordSpan">Writer</span>('127.0.0.1', 4150);
 
 w.connect();
 
-w.on(&#x27;ready&#x27;, function () {
-w.publish(&#x27;sample_topic&#x27;, &#x27;it really tied the room together&#x27;);
-w.publish(&#x27;sample_topic&#x27;, [
-  &#x27;Uh, excuse me. Mark it zero. Next frame.&#x27;,
+w.on('ready', function () {
+w.publish('sample_topic', 'it really tied the room together');
+w.publish('sample_topic', [
+  'Uh, excuse me. Mark it zero. Next frame.',
 ...</pre></li>
     </ul>
 
@@ -3006,32 +2999,32 @@ w.publish(&#x27;sample_topic&#x27;, [
     <ul>
     <li>description and source-code<pre class="apidocCodePre">Writer.prototype.connect = function () {
   this.conn = new WriterNSQDConnection(this.nsqdHost, this.nsqdPort, this.config);
-  this.debug(&#x27;connect&#x27;);
+  this.debug('connect');
   this.conn.connect();
   this.conn.on(WriterNSQDConnection.READY, (function(_this) {
     return function() {
-      _this.debug(&#x27;ready&#x27;);
+      _this.debug('ready');
       _this.ready = true;
       return _this.emit(Writer.READY);
     };
   })(this));
   this.conn.on(WriterNSQDConnection.CLOSED, (function(_this) {
     return function() {
-      _this.debug(&#x27;closed&#x27;);
+      _this.debug('closed');
       _this.ready = false;
       return _this.emit(Writer.CLOSED);
     };
   })(this));
   this.conn.on(WriterNSQDConnection.ERROR, (function(_this) {
     return function(err) {
-      _this.debug(&#x27;error&#x27;, err);
+      _this.debug('error', err);
       _this.ready = false;
       return _this.emit(Writer.ERROR, err);
     };
   })(this));
   return this.conn.on(WriterNSQDConnection.CONNECTION_ERROR, (function(_this) {
     return function(err) {
-      _this.debug(&#x27;error&#x27;, err);
+      _this.debug('error', err);
       _this.ready = false;
       return _this.emit(Writer.ERROR, err);
     };
@@ -3052,11 +3045,11 @@ w.publish(&#x27;sample_topic&#x27;, [
     <li>description and source-code<pre class="apidocCodePre">Writer.prototype.publish = function (topic, msgs, callback) {
   var connState, err, failed, msg, ready, ref, ref1, remove;
   connState = (ref = this.conn) != null ? (ref1 = ref.statemachine) != null ? ref1.current_state_name : void 0 : void 0;
-  if (!this.conn || (connState === &#x27;CLOSED&#x27; || connState === &#x27;ERROR&#x27;)) {
-    err = new Error(&#x27;No active Writer connection to send messages&#x27;);
+  if (!this.conn || (connState === 'CLOSED' || connState === 'ERROR')) {
+    err = new Error('No active Writer connection to send messages');
   }
   if (!msgs || _.isEmpty(msgs)) {
-    err = new Error(&#x27;Attempting to publish an empty message&#x27;);
+    err = new Error('Attempting to publish an empty message');
   }
   if (err) {
     if (callback) {
@@ -3072,7 +3065,7 @@ w.publish(&#x27;sample_topic&#x27;, [
       };
     })(this);
     failed = function(err) {
-      err || (err = new Error(&#x27;Connection closed!&#x27;));
+      err || (err = new Error('Connection closed!'));
       remove();
       return callback(err);
     };
@@ -3094,7 +3087,7 @@ w.publish(&#x27;sample_topic&#x27;, [
   msgs = (function() {
     var i, len, results;
     results = [];
-    for (i = 0, len = msgs.length; i &#x3c; len; i++) {
+    for (i = 0, len = msgs.length; i &lt; len; i++) {
       msg = msgs[i];
       if (_.isString(msg) || Buffer.isBuffer(msg)) {
         results.push(msg);
@@ -3123,7 +3116,7 @@ w.publish(&#x27;sample_topic&#x27;, [
     options = {};
   }
   WriterNSQDConnection.__super__.constructor.call(this, nsqdHost, nsqdPort, null, null, options);
-  this.debug = Debug(&#x22;nsqjs:writer:conn:&#x22; + nsqdHost + &#x22;/&#x22; + nsqdPort);
+  this.debug = Debug("nsqjs:writer:conn:" + nsqdHost + "/" + nsqdPort);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3153,7 +3146,7 @@ w.publish(&#x27;sample_topic&#x27;, [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">WriterNSQDConnection.prototype.produceMessages = function (topic, msgs, callback) {
-  return this.statemachine.raise(&#x27;produceMessages&#x27;, [topic, msgs, callback]);
+  return this.statemachine.raise('produceMessages', [topic, msgs, callback]);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3218,12 +3211,12 @@ w.publish(&#x27;sample_topic&#x27;, [
   var endpointURL;
   endpointURL = function(endpoint) {
     var parsedUrl;
-    if (endpoint.indexOf(&#x27;://&#x27;) === -1) {
-      endpoint = &#x22;http://&#x22; + endpoint;
+    if (endpoint.indexOf('://') === -1) {
+      endpoint = "http://" + endpoint;
     }
     parsedUrl = url.parse(endpoint, true);
-    if ((!parsedUrl.pathname) || (parsedUrl.pathname === &#x27;/&#x27;)) {
-      parsedUrl.pathname = &#x22;/lookup&#x22;;
+    if ((!parsedUrl.pathname) || (parsedUrl.pathname === '/')) {
+      parsedUrl.pathname = "/lookup";
     }
     parsedUrl.query.topic = topic;
     delete parsedUrl.search;
@@ -3341,8 +3334,8 @@ w.publish(&#x27;sample_topic&#x27;, [
     options = {};
   }
   NSQDConnection.__super__.constructor.apply(this, arguments);
-  connId = this.id().replace(&#x27;:&#x27;, &#x27;/&#x27;);
-  this.debug = Debug(&#x22;nsqjs:reader:&#x22; + this.topic + &#x22;/&#x22; + this.channel + &#x22;:conn:&#x22; + connId);
+  connId = this.id().replace(':', '/');
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel + ":conn:" + connId);
   this.config = new ConnectionConfig(options);
   this.config.validate();
   this.frameBuffer = new FrameBuffer();
@@ -3388,8 +3381,8 @@ w.publish(&#x27;sample_topic&#x27;, [
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -3414,7 +3407,7 @@ w.publish(&#x27;sample_topic&#x27;, [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -3463,8 +3456,8 @@ w.publish(&#x27;sample_topic&#x27;, [
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -3494,7 +3487,7 @@ w.publish(&#x27;sample_topic&#x27;, [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -3534,11 +3527,11 @@ w.publish(&#x27;sample_topic&#x27;, [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">connect = function () {
-  this.statemachine.raise(&#x27;connecting&#x27;);
+  this.statemachine.raise('connecting');
   return process.nextTick((function(_this) {
     return function() {
       _this.conn = net.connect(_this.nsqdPort, _this.nsqdHost, function() {
-        _this.statemachine.raise(&#x27;connected&#x27;);
+        _this.statemachine.raise('connected');
         _this.emit(NSQDConnection.CONNECTED);
         return _this.identifyTimeoutId = setTimeout(_this.identifyTimeout.bind(_this), 5000);
       });
@@ -3548,16 +3541,16 @@ w.publish(&#x27;sample_topic&#x27;, [
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ```js
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var reader = new nsq.Reader(&#x27;sample_topic&#x27;, &#x27;test_channel&#x27;, {
-  lookupdHTTPAddresses: &#x27;127.0.0.1:4161&#x27;
+var reader = new nsq.Reader('sample_topic', 'test_channel', {
+  lookupdHTTPAddresses: '127.0.0.1:4161'
 });
 
 reader.<span class="apidocCodeKeywordSpan">connect</span>();
 
-reader.on(&#x27;message&#x27;, function (msg) {
-  console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
   msg.finish();
 });
 ```
@@ -3598,8 +3591,8 @@ reader.on(&#x27;message&#x27;, function (msg) {
     options = {};
   }
   NSQDConnection.__super__.constructor.apply(this, arguments);
-  connId = this.id().replace(&#x27;:&#x27;, &#x27;/&#x27;);
-  this.debug = Debug(&#x22;nsqjs:reader:&#x22; + this.topic + &#x22;/&#x22; + this.channel + &#x22;:conn:&#x22; + connId);
+  connId = this.id().replace(':', '/');
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel + ":conn:" + connId);
   this.config = new ConnectionConfig(options);
   this.config.validate();
   this.frameBuffer = new FrameBuffer();
@@ -3634,16 +3627,16 @@ reader.on(&#x27;message&#x27;, function (msg) {
     var child = new ctor, result = func.apply(child, args);
     return Object(result) === result ? result : child;
   })(Message, slice.call(msgComponents).concat([this.config.requeueDelay], [this.msgTimeout], [this.maxMsgTimeout]), function(){});
-  this.debug(&#x22;Received message [&#x22; + msg.id + &#x22;] [attempts: &#x22; + msg.attempts + &#x22;]&#x22;);
+  this.debug("Received message [" + msg.id + "] [attempts: " + msg.attempts + "]");
   msg.on(Message.RESPOND, (function(_this) {
     return function(responseType, wireData) {
       _this.write(wireData);
       if (responseType === Message.FINISH) {
-        _this.debug(&#x22;Finished message [&#x22; + msg.id + &#x22;] [timedout=&#x22; + (msg.timedout === true) + &#x22;, elapsed=&#x22; + (Date.now() - msg.
-receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
+        _this.debug("Finished message [" + msg.id + "] [timedout=" + (msg.timedout === true) + ", elapsed=" + (Date.now() - msg.
+receivedOn) + "ms, touch_count=" + msg.touchCount + "]");
         return _this.emit(NSQDConnection.FINISHED);
       } else if (responseType === Message.REQUEUE) {
-        _this.debug(&#x22;Requeued message [&#x22; + msg.id + &#x22;]&#x22;);
+        _this.debug("Requeued message [" + msg.id + "]");
         return _this.emit(NSQDConnection.REQUEUED);
       }
     };
@@ -3699,18 +3692,18 @@ ConnectionRdy.prototype.start = function() {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">id = function () {
-  return this.nsqdHost + &#x22;:&#x22; + this.nsqdPort;
+  return this.nsqdHost + ":" + this.nsqdPort;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-ConnectionRdy.STATE_CHANGE = &#x27;statechange&#x27;;
+ConnectionRdy.STATE_CHANGE = 'statechange';
 
 function ConnectionRdy(conn1) {
   var connId, readerId;
   this.conn = conn1;
-  readerId = this.conn.topic + &#x22;/&#x22; + this.conn.channel;
-  connId = &#x22;&#x22; + (this.conn.<span class="apidocCodeKeywordSpan">id</span>().replace(&#x27;:&#x27;, &#x27;/&#x27;));
-  this.debug = Debug(&#x22;nsqjs:reader:&#x22; + readerId + &#x22;:rdy:conn:&#x22; + connId);
+  readerId = this.conn.topic + "/" + this.conn.channel;
+  connId = "" + (this.conn.<span class="apidocCodeKeywordSpan">id</span>().replace(':', '/'));
+  this.debug = Debug("nsqjs:reader:" + readerId + ":rdy:conn:" + connId);
   this.maxConnRdy = 0;
   this.inFlight = 0;
   this.lastRdySent = 0;
@@ -3732,7 +3725,7 @@ function ConnectionRdy(conn1) {
     <li>description and source-code<pre class="apidocCodePre">identify = function () {
   var i, identify, key, len, longName, removableKeys, shortName;
   longName = os.hostname();
-  shortName = longName.split(&#x27;.&#x27;)[0];
+  shortName = longName.split('.')[0];
   identify = {
     client_id: this.config.clientId || shortName,
     deflate: this.config.deflate,
@@ -3747,10 +3740,10 @@ function ConnectionRdy(conn1) {
     short_id: shortName,
     snappy: this.config.snappy,
     tls_v1: this.config.tls,
-    user_agent: &#x22;nsqjs/&#x22; + version
+    user_agent: "nsqjs/" + version
   };
-  removableKeys = [&#x27;msg_timeout&#x27;, &#x27;output_buffer_size&#x27;, &#x27;output_buffer_timeout&#x27;, &#x27;sample_rate&#x27;];
-  for (i = 0, len = removableKeys.length; i &#x3c; len; i++) {
+  removableKeys = ['msg_timeout', 'output_buffer_size', 'output_buffer_timeout', 'sample_rate'];
+  for (i = 0, len = removableKeys.length; i &lt; len; i++) {
     key = removableKeys[i];
     if (identify[key] === null) {
       delete identify[key];
@@ -3771,7 +3764,7 @@ function ConnectionRdy(conn1) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">identifyTimeout = function () {
-  return this.statemachine.goto(&#x27;ERROR&#x27;, new Error(&#x27;Timed out identifying with nsqd&#x27;));
+  return this.statemachine.goto('ERROR', new Error('Timed out identifying with nsqd'));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3794,14 +3787,14 @@ function ConnectionRdy(conn1) {
     frameId = frame[0], payload = frame[1];
     switch (frameId) {
       case wire.FRAME_TYPE_RESPONSE:
-        results.push(this.statemachine.raise(&#x27;response&#x27;, payload));
+        results.push(this.statemachine.raise('response', payload));
         break;
       case wire.FRAME_TYPE_ERROR:
-        results.push(this.statemachine.goto(&#x27;ERROR&#x27;, new Error(payload.toString())));
+        results.push(this.statemachine.goto('ERROR', new Error(payload.toString())));
         break;
       case wire.FRAME_TYPE_MESSAGE:
         this.lastMessageTimestamp = this.lastReceivedTimestamp;
-        results.push(this.statemachine.raise(&#x27;consumeMessage&#x27;, this.createMessage(payload)));
+        results.push(this.statemachine.raise('consumeMessage', this.createMessage(payload)));
         break;
       default:
         results.push(void 0);
@@ -3850,7 +3843,7 @@ function ConnectionRdy(conn1) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">reconsumeFrameBuffer = function () {
   var data;
-  if (this.frameBuffer.buffer &#x26;&#x26; this.frameBuffer.buffer.length) {
+  if (this.frameBuffer.buffer &amp;&amp; this.frameBuffer.buffer.length) {
     data = this.frameBuffer.buffer;
     delete this.frameBuffer.buffer;
     return this.receiveRawData(data);
@@ -3869,20 +3862,20 @@ function ConnectionRdy(conn1) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">registerStreamListeners = function (conn) {
-  conn.on(&#x27;data&#x27;, (function(_this) {
+  conn.on('data', (function(_this) {
     return function(data) {
       return _this.receiveRawData(data);
     };
   })(this));
-  conn.on(&#x27;error&#x27;, (function(_this) {
+  conn.on('error', (function(_this) {
     return function(err) {
-      _this.statemachine.goto(&#x27;CLOSED&#x27;);
-      return _this.emit(&#x27;connection_error&#x27;, err);
+      _this.statemachine.goto('CLOSED');
+      return _this.emit('connection_error', err);
     };
   })(this));
-  return conn.on(&#x27;close&#x27;, (function(_this) {
+  return conn.on('close', (function(_this) {
     return function(err) {
-      return _this.statemachine.raise(&#x27;close&#x27;);
+      return _this.statemachine.raise('close');
     };
   })(this));
 }</pre></li>
@@ -3899,14 +3892,14 @@ function ConnectionRdy(conn1) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">setRdy = function (rdyCount) {
-  return this.statemachine.raise(&#x27;ready&#x27;, rdyCount);
+  return this.statemachine.raise('ready', rdyCount);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 };
 
 ConnectionRdy.prototype.setRdy = function(rdyCount) {
-  this.log(&#x22;RDY &#x22; + rdyCount);
-  if (rdyCount &#x3c; 0 || rdyCount &#x3e; this.maxConnRdy) {
+  this.log("RDY " + rdyCount);
+  if (rdyCount &lt; 0 || rdyCount &gt; this.maxConnRdy) {
     return;
   }
   this.conn.<span class="apidocCodeKeywordSpan">setRdy</span>(rdyCount);
@@ -3970,8 +3963,8 @@ ConnectionRdy.prototype.log = function(message) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">startTLS = function (callback) {
   var event, i, len, options, ref1, tlsConn;
-  ref1 = [&#x27;data&#x27;, &#x27;error&#x27;, &#x27;close&#x27;];
-  for (i = 0, len = ref1.length; i &#x3c; len; i++) {
+  ref1 = ['data', 'error', 'close'];
+  for (i = 0, len = ref1.length; i &lt; len; i++) {
     event = ref1[i];
     this.conn.removeAllListeners(event);
   }
@@ -3982,7 +3975,7 @@ ConnectionRdy.prototype.log = function(message) {
   tlsConn = tls.connect(options, (function(_this) {
     return function() {
       _this.conn = tlsConn;
-      return typeof callback === &#x22;function&#x22; ? callback() : void 0;
+      return typeof callback === "function" ? callback() : void 0;
     };
   })(this));
   return this.registerStreamListeners(tlsConn);
@@ -4011,7 +4004,7 @@ ConnectionRdy.prototype.log = function(message) {
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  throw new Error(&#x22;MPUB requires an array of message&#x22;);
+  throw new Error("MPUB requires an array of message");
 }
 messages = _.map(data, function(message) {
   var buffer;
@@ -4065,11 +4058,11 @@ numMessagesBuffer.writeInt32BE(messages.length, 0);
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">connect = function () {
-  this.statemachine.raise(&#x27;connecting&#x27;);
+  this.statemachine.raise('connecting');
   return process.nextTick((function(_this) {
     return function() {
       _this.conn = net.connect(_this.nsqdPort, _this.nsqdHost, function() {
-        _this.statemachine.raise(&#x27;connected&#x27;);
+        _this.statemachine.raise('connected');
         _this.emit(NSQDConnection.CONNECTED);
         return _this.identifyTimeoutId = setTimeout(_this.identifyTimeout.bind(_this), 5000);
       });
@@ -4079,16 +4072,16 @@ numMessagesBuffer.writeInt32BE(messages.length, 0);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ```js
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var reader = new nsq.Reader(&#x27;sample_topic&#x27;, &#x27;test_channel&#x27;, {
-  lookupdHTTPAddresses: &#x27;127.0.0.1:4161&#x27;
+var reader = new nsq.Reader('sample_topic', 'test_channel', {
+  lookupdHTTPAddresses: '127.0.0.1:4161'
 });
 
 reader.<span class="apidocCodeKeywordSpan">connect</span>();
 
-reader.on(&#x27;message&#x27;, function (msg) {
-  console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
   msg.finish();
 });
 ```
@@ -4137,16 +4130,16 @@ reader.on(&#x27;message&#x27;, function (msg) {
     var child = new ctor, result = func.apply(child, args);
     return Object(result) === result ? result : child;
   })(Message, slice.call(msgComponents).concat([this.config.requeueDelay], [this.msgTimeout], [this.maxMsgTimeout]), function(){});
-  this.debug(&#x22;Received message [&#x22; + msg.id + &#x22;] [attempts: &#x22; + msg.attempts + &#x22;]&#x22;);
+  this.debug("Received message [" + msg.id + "] [attempts: " + msg.attempts + "]");
   msg.on(Message.RESPOND, (function(_this) {
     return function(responseType, wireData) {
       _this.write(wireData);
       if (responseType === Message.FINISH) {
-        _this.debug(&#x22;Finished message [&#x22; + msg.id + &#x22;] [timedout=&#x22; + (msg.timedout === true) + &#x22;, elapsed=&#x22; + (Date.now() - msg.
-receivedOn) + &#x22;ms, touch_count=&#x22; + msg.touchCount + &#x22;]&#x22;);
+        _this.debug("Finished message [" + msg.id + "] [timedout=" + (msg.timedout === true) + ", elapsed=" + (Date.now() - msg.
+receivedOn) + "ms, touch_count=" + msg.touchCount + "]");
         return _this.emit(NSQDConnection.FINISHED);
       } else if (responseType === Message.REQUEUE) {
-        _this.debug(&#x22;Requeued message [&#x22; + msg.id + &#x22;]&#x22;);
+        _this.debug("Requeued message [" + msg.id + "]");
         return _this.emit(NSQDConnection.REQUEUED);
       }
     };
@@ -4212,18 +4205,18 @@ ConnectionRdy.prototype.start = function() {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">id = function () {
-  return this.nsqdHost + &#x22;:&#x22; + this.nsqdPort;
+  return this.nsqdHost + ":" + this.nsqdPort;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-ConnectionRdy.STATE_CHANGE = &#x27;statechange&#x27;;
+ConnectionRdy.STATE_CHANGE = 'statechange';
 
 function ConnectionRdy(conn1) {
   var connId, readerId;
   this.conn = conn1;
-  readerId = this.conn.topic + &#x22;/&#x22; + this.conn.channel;
-  connId = &#x22;&#x22; + (this.conn.<span class="apidocCodeKeywordSpan">id</span>().replace(&#x27;:&#x27;, &#x27;/&#x27;));
-  this.debug = Debug(&#x22;nsqjs:reader:&#x22; + readerId + &#x22;:rdy:conn:&#x22; + connId);
+  readerId = this.conn.topic + "/" + this.conn.channel;
+  connId = "" + (this.conn.<span class="apidocCodeKeywordSpan">id</span>().replace(':', '/'));
+  this.debug = Debug("nsqjs:reader:" + readerId + ":rdy:conn:" + connId);
   this.maxConnRdy = 0;
   this.inFlight = 0;
   this.lastRdySent = 0;
@@ -4250,7 +4243,7 @@ function ConnectionRdy(conn1) {
     <li>description and source-code<pre class="apidocCodePre">identify = function () {
   var i, identify, key, len, longName, removableKeys, shortName;
   longName = os.hostname();
-  shortName = longName.split(&#x27;.&#x27;)[0];
+  shortName = longName.split('.')[0];
   identify = {
     client_id: this.config.clientId || shortName,
     deflate: this.config.deflate,
@@ -4265,10 +4258,10 @@ function ConnectionRdy(conn1) {
     short_id: shortName,
     snappy: this.config.snappy,
     tls_v1: this.config.tls,
-    user_agent: &#x22;nsqjs/&#x22; + version
+    user_agent: "nsqjs/" + version
   };
-  removableKeys = [&#x27;msg_timeout&#x27;, &#x27;output_buffer_size&#x27;, &#x27;output_buffer_timeout&#x27;, &#x27;sample_rate&#x27;];
-  for (i = 0, len = removableKeys.length; i &#x3c; len; i++) {
+  removableKeys = ['msg_timeout', 'output_buffer_size', 'output_buffer_timeout', 'sample_rate'];
+  for (i = 0, len = removableKeys.length; i &lt; len; i++) {
     key = removableKeys[i];
     if (identify[key] === null) {
       delete identify[key];
@@ -4294,7 +4287,7 @@ function ConnectionRdy(conn1) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">identifyTimeout = function () {
-  return this.statemachine.goto(&#x27;ERROR&#x27;, new Error(&#x27;Timed out identifying with nsqd&#x27;));
+  return this.statemachine.goto('ERROR', new Error('Timed out identifying with nsqd'));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -4322,14 +4315,14 @@ function ConnectionRdy(conn1) {
     frameId = frame[0], payload = frame[1];
     switch (frameId) {
       case wire.FRAME_TYPE_RESPONSE:
-        results.push(this.statemachine.raise(&#x27;response&#x27;, payload));
+        results.push(this.statemachine.raise('response', payload));
         break;
       case wire.FRAME_TYPE_ERROR:
-        results.push(this.statemachine.goto(&#x27;ERROR&#x27;, new Error(payload.toString())));
+        results.push(this.statemachine.goto('ERROR', new Error(payload.toString())));
         break;
       case wire.FRAME_TYPE_MESSAGE:
         this.lastMessageTimestamp = this.lastReceivedTimestamp;
-        results.push(this.statemachine.raise(&#x27;consumeMessage&#x27;, this.createMessage(payload)));
+        results.push(this.statemachine.raise('consumeMessage', this.createMessage(payload)));
         break;
       default:
         results.push(void 0);
@@ -4388,7 +4381,7 @@ function ConnectionRdy(conn1) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">reconsumeFrameBuffer = function () {
   var data;
-  if (this.frameBuffer.buffer &#x26;&#x26; this.frameBuffer.buffer.length) {
+  if (this.frameBuffer.buffer &amp;&amp; this.frameBuffer.buffer.length) {
     data = this.frameBuffer.buffer;
     delete this.frameBuffer.buffer;
     return this.receiveRawData(data);
@@ -4412,20 +4405,20 @@ function ConnectionRdy(conn1) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">registerStreamListeners = function (conn) {
-  conn.on(&#x27;data&#x27;, (function(_this) {
+  conn.on('data', (function(_this) {
     return function(data) {
       return _this.receiveRawData(data);
     };
   })(this));
-  conn.on(&#x27;error&#x27;, (function(_this) {
+  conn.on('error', (function(_this) {
     return function(err) {
-      _this.statemachine.goto(&#x27;CLOSED&#x27;);
-      return _this.emit(&#x27;connection_error&#x27;, err);
+      _this.statemachine.goto('CLOSED');
+      return _this.emit('connection_error', err);
     };
   })(this));
-  return conn.on(&#x27;close&#x27;, (function(_this) {
+  return conn.on('close', (function(_this) {
     return function(err) {
-      return _this.statemachine.raise(&#x27;close&#x27;);
+      return _this.statemachine.raise('close');
     };
   })(this));
 }</pre></li>
@@ -4447,14 +4440,14 @@ function ConnectionRdy(conn1) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">setRdy = function (rdyCount) {
-  return this.statemachine.raise(&#x27;ready&#x27;, rdyCount);
+  return this.statemachine.raise('ready', rdyCount);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 };
 
 ConnectionRdy.prototype.setRdy = function(rdyCount) {
-  this.log(&#x22;RDY &#x22; + rdyCount);
-  if (rdyCount &#x3c; 0 || rdyCount &#x3e; this.maxConnRdy) {
+  this.log("RDY " + rdyCount);
+  if (rdyCount &lt; 0 || rdyCount &gt; this.maxConnRdy) {
     return;
   }
   this.conn.<span class="apidocCodeKeywordSpan">setRdy</span>(rdyCount);
@@ -4533,8 +4526,8 @@ ConnectionRdy.prototype.log = function(message) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">startTLS = function (callback) {
   var event, i, len, options, ref1, tlsConn;
-  ref1 = [&#x27;data&#x27;, &#x27;error&#x27;, &#x27;close&#x27;];
-  for (i = 0, len = ref1.length; i &#x3c; len; i++) {
+  ref1 = ['data', 'error', 'close'];
+  for (i = 0, len = ref1.length; i &lt; len; i++) {
     event = ref1[i];
     this.conn.removeAllListeners(event);
   }
@@ -4545,7 +4538,7 @@ ConnectionRdy.prototype.log = function(message) {
   tlsConn = tls.connect(options, (function(_this) {
     return function() {
       _this.conn = tlsConn;
-      return typeof callback === &#x22;function&#x22; ? callback() : void 0;
+      return typeof callback === "function" ? callback() : void 0;
     };
   })(this));
   return this.registerStreamListeners(tlsConn);
@@ -4579,7 +4572,7 @@ ConnectionRdy.prototype.log = function(message) {
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  throw new Error(&#x22;MPUB requires an array of message&#x22;);
+  throw new Error("MPUB requires an array of message");
 }
 messages = _.map(data, function(message) {
   var buffer;
@@ -4616,32 +4609,32 @@ numMessagesBuffer.writeInt32BE(messages.length, 0);
     <li>description and source-code<pre class="apidocCodePre">function Reader(topic, channel, options) {
   this.topic = topic;
   this.channel = channel;
-  this.debug = Debug(&#x22;nsqjs:reader:&#x22; + this.topic + &#x22;/&#x22; + this.channel);
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel);
   this.config = new ReaderConfig(options);
   this.config.validate();
-  this.debug(&#x27;Configuration&#x27;);
+  this.debug('Configuration');
   this.debug(this.config);
   this.roundrobinLookupd = new RoundRobinList(this.config.lookupdHTTPAddresses);
-  this.readerRdy = new ReaderRdy(this.config.maxInFlight, this.config.maxBackoffDuration, this.topic + &#x22;/&#x22; + this.channel);
+  this.readerRdy = new ReaderRdy(this.config.maxInFlight, this.config.maxBackoffDuration, this.topic + "/" + this.channel);
   this.connectIntervalId = null;
   this.connectionIds = [];
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-$ nsqd --lookupd-tcp-address=127.0.0.1:4160 &#x26;
+$ nsqd --lookupd-tcp-address=127.0.0.1:4160 &amp;
 ```
 
 #### JavaScript
 ```js
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var reader = new nsq.<span class="apidocCodeKeywordSpan">Reader</span>(&#x27;sample_topic&#x27;, &#x27;test_channel&#x27;, {
-lookupdHTTPAddresses: &#x27;127.0.0.1:4161&#x27;
+var reader = new nsq.<span class="apidocCodeKeywordSpan">Reader</span>('sample_topic', 'test_channel', {
+lookupdHTTPAddresses: '127.0.0.1:4161'
 });
 
 reader.connect();
 
-reader.on(&#x27;message&#x27;, function (msg) {
-console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
+reader.on('message', function (msg) {
+console.log('Received message [%s]: %s', msg.id, msg.body.toString());
 ...</pre></li>
     </ul>
 
@@ -4673,8 +4666,8 @@ console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -4699,7 +4692,7 @@ console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -4741,19 +4734,19 @@ console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
   return this.readerRdy.close();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  w.publish(&#x27;sample_topic&#x27;, [
-    &#x27;Uh, excuse me. Mark it zero. Next frame.&#x27;,
-    &#x27;Smokey, this is not \&#x27;Nam. This is bowling. There are rules.&#x27;
+  w.publish('sample_topic', [
+    'Uh, excuse me. Mark it zero. Next frame.',
+    'Smokey, this is not \'Nam. This is bowling. There are rules.'
   ]);
-  w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
+  w.publish('sample_topic', 'Wu?', function (err) {
     if (err) { return console.error(err.message); }
-    console.log(&#x27;Message sent successfully&#x27;);
+    console.log('Message sent successfully');
     w.<span class="apidocCodeKeywordSpan">close</span>();
   });
 });
 
-w.on(&#x27;closed&#x27;, function () {
-  console.log(&#x27;Writer closed&#x27;);
+w.on('closed', function () {
+  console.log('Writer closed');
 });
 ```
 ...</pre></li>
@@ -4779,12 +4772,12 @@ w.on(&#x27;closed&#x27;, function () {
         if (_this.isPaused()) {
           return;
         }
-        if (_this.connectionIds.length &#x3c; _this.config.nsqdTCPAddresses.length) {
+        if (_this.connectionIds.length &lt; _this.config.nsqdTCPAddresses.length) {
           ref = _this.config.nsqdTCPAddresses;
           results = [];
-          for (i = 0, len = ref.length; i &#x3c; len; i++) {
+          for (i = 0, len = ref.length; i &lt; len; i++) {
             addr = ref[i];
-            ref1 = addr.split(&#x27;:&#x27;), address = ref1[0], port = ref1[1];
+            ref1 = addr.split(':'), address = ref1[0], port = ref1[1];
             results.push(_this.connectToNSQD(address, Number(port)));
           }
           return results;
@@ -4810,16 +4803,16 @@ w.on(&#x27;closed&#x27;, function () {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ```js
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var reader = new nsq.Reader(&#x27;sample_topic&#x27;, &#x27;test_channel&#x27;, {
-  lookupdHTTPAddresses: &#x27;127.0.0.1:4161&#x27;
+var reader = new nsq.Reader('sample_topic', 'test_channel', {
+  lookupdHTTPAddresses: '127.0.0.1:4161'
 });
 
 reader.<span class="apidocCodeKeywordSpan">connect</span>();
 
-reader.on(&#x27;message&#x27;, function (msg) {
-  console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
   msg.finish();
 });
 ```
@@ -4837,12 +4830,12 @@ reader.on(&#x27;message&#x27;, function (msg) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">connectToNSQD = function (host, port) {
   var conn;
-  this.debug(&#x22;discovered &#x22; + host + &#x22;:&#x22; + port + &#x22; for &#x22; + this.topic + &#x22; topic&#x22;);
+  this.debug("discovered " + host + ":" + port + " for " + this.topic + " topic");
   conn = new NSQDConnection(host, port, this.topic, this.channel, this.config);
   if (this.connectionIds.indexOf(conn.id()) !== -1) {
     return;
   }
-  this.debug(&#x22;connecting to &#x22; + host + &#x22;:&#x22; + port);
+  this.debug("connecting to " + host + ":" + port);
   this.connectionIds.push(conn.id());
   this.registerConnectionListeners(conn);
   this.readerRdy.addConnection(conn);
@@ -4863,13 +4856,13 @@ reader.on(&#x27;message&#x27;, function (msg) {
     <li>description and source-code<pre class="apidocCodePre">function Reader(topic, channel, options) {
   this.topic = topic;
   this.channel = channel;
-  this.debug = Debug(&#x22;nsqjs:reader:&#x22; + this.topic + &#x22;/&#x22; + this.channel);
+  this.debug = Debug("nsqjs:reader:" + this.topic + "/" + this.channel);
   this.config = new ReaderConfig(options);
   this.config.validate();
-  this.debug(&#x27;Configuration&#x27;);
+  this.debug('Configuration');
   this.debug(this.config);
   this.roundrobinLookupd = new RoundRobinList(this.config.lookupdHTTPAddresses);
-  this.readerRdy = new ReaderRdy(this.config.maxInFlight, this.config.maxBackoffDuration, this.topic + &#x22;/&#x22; + this.channel);
+  this.readerRdy = new ReaderRdy(this.config.maxInFlight, this.config.maxBackoffDuration, this.topic + "/" + this.channel);
   this.connectIntervalId = null;
   this.connectionIds = [];
 }</pre></li>
@@ -4889,9 +4882,9 @@ reader.on(&#x27;message&#x27;, function (msg) {
   return process.nextTick((function(_this) {
     return function() {
       var autoFinishMessage, numDiscardListeners, ref;
-      autoFinishMessage = (0 &#x3c; (ref = _this.config.maxAttempts) &#x26;&#x26; ref &#x3c;= message.attempts);
+      autoFinishMessage = (0 &lt; (ref = _this.config.maxAttempts) &amp;&amp; ref &lt;= message.attempts);
       numDiscardListeners = _this.listeners(Reader.DISCARD).length;
-      if (autoFinishMessage &#x26;&#x26; numDiscardListeners &#x3e; 0) {
+      if (autoFinishMessage &amp;&amp; numDiscardListeners &gt; 0) {
         _this.emit(Reader.DISCARD, message);
       } else {
         _this.emit(Reader.MESSAGE, message);
@@ -4921,7 +4914,7 @@ reader.on(&#x27;message&#x27;, function (msg) {
 };
 
 ReaderRdy.prototype.isLowRdy = function() {
-  return this.maxInFlight &#x3c; this.connections.length;
+  return this.maxInFlight &lt; this.connections.length;
 };
 
 ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
@@ -4946,7 +4939,7 @@ ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">pause = function () {
-  this.debug(&#x27;pause&#x27;);
+  this.debug('pause');
   return this.readerRdy.pause();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -4972,7 +4965,7 @@ ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
       var i, len, n, results;
       if (!err) {
         results = [];
-        for (i = 0, len = nodes.length; i &#x3c; len; i++) {
+        for (i = 0, len = nodes.length; i &lt; len; i++) {
           n = nodes[i];
           results.push(_this.connectToNSQD(n.broadcast_address, n.tcp_port));
         }
@@ -5045,7 +5038,7 @@ ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">unpause = function () {
-  this.debug(&#x27;unpause&#x27;);
+  this.debug('unpause');
   return this.readerRdy.unpause();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -5070,19 +5063,19 @@ ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
   return this.readerRdy.close();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  w.publish(&#x27;sample_topic&#x27;, [
-    &#x27;Uh, excuse me. Mark it zero. Next frame.&#x27;,
-    &#x27;Smokey, this is not \&#x27;Nam. This is bowling. There are rules.&#x27;
+  w.publish('sample_topic', [
+    'Uh, excuse me. Mark it zero. Next frame.',
+    'Smokey, this is not \'Nam. This is bowling. There are rules.'
   ]);
-  w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
+  w.publish('sample_topic', 'Wu?', function (err) {
     if (err) { return console.error(err.message); }
-    console.log(&#x27;Message sent successfully&#x27;);
+    console.log('Message sent successfully');
     w.<span class="apidocCodeKeywordSpan">close</span>();
   });
 });
 
-w.on(&#x27;closed&#x27;, function () {
-  console.log(&#x27;Writer closed&#x27;);
+w.on('closed', function () {
+  console.log('Writer closed');
 });
 ```
 ...</pre></li>
@@ -5113,12 +5106,12 @@ w.on(&#x27;closed&#x27;, function () {
         if (_this.isPaused()) {
           return;
         }
-        if (_this.connectionIds.length &#x3c; _this.config.nsqdTCPAddresses.length) {
+        if (_this.connectionIds.length &lt; _this.config.nsqdTCPAddresses.length) {
           ref = _this.config.nsqdTCPAddresses;
           results = [];
-          for (i = 0, len = ref.length; i &#x3c; len; i++) {
+          for (i = 0, len = ref.length; i &lt; len; i++) {
             addr = ref[i];
-            ref1 = addr.split(&#x27;:&#x27;), address = ref1[0], port = ref1[1];
+            ref1 = addr.split(':'), address = ref1[0], port = ref1[1];
             results.push(_this.connectToNSQD(address, Number(port)));
           }
           return results;
@@ -5144,16 +5137,16 @@ w.on(&#x27;closed&#x27;, function () {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ```js
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var reader = new nsq.Reader(&#x27;sample_topic&#x27;, &#x27;test_channel&#x27;, {
-  lookupdHTTPAddresses: &#x27;127.0.0.1:4161&#x27;
+var reader = new nsq.Reader('sample_topic', 'test_channel', {
+  lookupdHTTPAddresses: '127.0.0.1:4161'
 });
 
 reader.<span class="apidocCodeKeywordSpan">connect</span>();
 
-reader.on(&#x27;message&#x27;, function (msg) {
-  console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
   msg.finish();
 });
 ```
@@ -5176,12 +5169,12 @@ reader.on(&#x27;message&#x27;, function (msg) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">connectToNSQD = function (host, port) {
   var conn;
-  this.debug(&#x22;discovered &#x22; + host + &#x22;:&#x22; + port + &#x22; for &#x22; + this.topic + &#x22; topic&#x22;);
+  this.debug("discovered " + host + ":" + port + " for " + this.topic + " topic");
   conn = new NSQDConnection(host, port, this.topic, this.channel, this.config);
   if (this.connectionIds.indexOf(conn.id()) !== -1) {
     return;
   }
-  this.debug(&#x22;connecting to &#x22; + host + &#x22;:&#x22; + port);
+  this.debug("connecting to " + host + ":" + port);
   this.connectionIds.push(conn.id());
   this.registerConnectionListeners(conn);
   this.readerRdy.addConnection(conn);
@@ -5208,9 +5201,9 @@ reader.on(&#x27;message&#x27;, function (msg) {
   return process.nextTick((function(_this) {
     return function() {
       var autoFinishMessage, numDiscardListeners, ref;
-      autoFinishMessage = (0 &#x3c; (ref = _this.config.maxAttempts) &#x26;&#x26; ref &#x3c;= message.attempts);
+      autoFinishMessage = (0 &lt; (ref = _this.config.maxAttempts) &amp;&amp; ref &lt;= message.attempts);
       numDiscardListeners = _this.listeners(Reader.DISCARD).length;
-      if (autoFinishMessage &#x26;&#x26; numDiscardListeners &#x3e; 0) {
+      if (autoFinishMessage &amp;&amp; numDiscardListeners &gt; 0) {
         _this.emit(Reader.DISCARD, message);
       } else {
         _this.emit(Reader.MESSAGE, message);
@@ -5245,7 +5238,7 @@ reader.on(&#x27;message&#x27;, function (msg) {
 };
 
 ReaderRdy.prototype.isLowRdy = function() {
-  return this.maxInFlight &#x3c; this.connections.length;
+  return this.maxInFlight &lt; this.connections.length;
 };
 
 ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
@@ -5275,7 +5268,7 @@ ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">pause = function () {
-  this.debug(&#x27;pause&#x27;);
+  this.debug('pause');
   return this.readerRdy.pause();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -5306,7 +5299,7 @@ ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
       var i, len, n, results;
       if (!err) {
         results = [];
-        for (i = 0, len = nodes.length; i &#x3c; len; i++) {
+        for (i = 0, len = nodes.length; i &lt; len; i++) {
           n = nodes[i];
           results.push(_this.connectToNSQD(n.broadcast_address, n.tcp_port));
         }
@@ -5389,7 +5382,7 @@ ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">unpause = function () {
-  this.debug(&#x27;unpause&#x27;);
+  this.debug('unpause');
   return this.readerRdy.unpause();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -5416,11 +5409,11 @@ ReaderRdy.prototype.onMessageSuccess = function(connectionRdy) {
   this.nsqdPort = nsqdPort;
   Writer.__super__.constructor.apply(this, arguments);
   this.setMaxListeners(10000);
-  this.debug = Debug(&#x22;nsqjs:writer:&#x22; + this.nsqdHost + &#x22;/&#x22; + this.nsqdPort);
+  this.debug = Debug("nsqjs:writer:" + this.nsqdHost + "/" + this.nsqdPort);
   this.config = new ConnectionConfig(options);
   this.config.validate();
   this.ready = false;
-  this.debug(&#x27;Configuration&#x27;);
+  this.debug('Configuration');
   this.debug(this.config);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
@@ -5429,16 +5422,16 @@ The writer sends a single message and then a list of messages.
 
 #### JavaScript
 ```js
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var w = new nsq.<span class="apidocCodeKeywordSpan">Writer</span>(&#x27;127.0.0.1&#x27;, 4150);
+var w = new nsq.<span class="apidocCodeKeywordSpan">Writer</span>('127.0.0.1', 4150);
 
 w.connect();
 
-w.on(&#x27;ready&#x27;, function () {
-w.publish(&#x27;sample_topic&#x27;, &#x27;it really tied the room together&#x27;);
-w.publish(&#x27;sample_topic&#x27;, [
-  &#x27;Uh, excuse me. Mark it zero. Next frame.&#x27;,
+w.on('ready', function () {
+w.publish('sample_topic', 'it really tied the room together');
+w.publish('sample_topic', [
+  'Uh, excuse me. Mark it zero. Next frame.',
 ...</pre></li>
     </ul>
 
@@ -5470,8 +5463,8 @@ w.publish(&#x27;sample_topic&#x27;, [
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -5496,7 +5489,7 @@ w.publish(&#x27;sample_topic&#x27;, [
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -5533,19 +5526,19 @@ w.publish(&#x27;sample_topic&#x27;, [
   return this.conn.destroy();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  w.publish(&#x27;sample_topic&#x27;, [
-    &#x27;Uh, excuse me. Mark it zero. Next frame.&#x27;,
-    &#x27;Smokey, this is not \&#x27;Nam. This is bowling. There are rules.&#x27;
+  w.publish('sample_topic', [
+    'Uh, excuse me. Mark it zero. Next frame.',
+    'Smokey, this is not \'Nam. This is bowling. There are rules.'
   ]);
-  w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
+  w.publish('sample_topic', 'Wu?', function (err) {
     if (err) { return console.error(err.message); }
-    console.log(&#x27;Message sent successfully&#x27;);
+    console.log('Message sent successfully');
     w.<span class="apidocCodeKeywordSpan">close</span>();
   });
 });
 
-w.on(&#x27;closed&#x27;, function () {
-  console.log(&#x27;Writer closed&#x27;);
+w.on('closed', function () {
+  console.log('Writer closed');
 });
 ```
 ...</pre></li>
@@ -5562,32 +5555,32 @@ w.on(&#x27;closed&#x27;, function () {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">connect = function () {
   this.conn = new WriterNSQDConnection(this.nsqdHost, this.nsqdPort, this.config);
-  this.debug(&#x27;connect&#x27;);
+  this.debug('connect');
   this.conn.connect();
   this.conn.on(WriterNSQDConnection.READY, (function(_this) {
     return function() {
-      _this.debug(&#x27;ready&#x27;);
+      _this.debug('ready');
       _this.ready = true;
       return _this.emit(Writer.READY);
     };
   })(this));
   this.conn.on(WriterNSQDConnection.CLOSED, (function(_this) {
     return function() {
-      _this.debug(&#x27;closed&#x27;);
+      _this.debug('closed');
       _this.ready = false;
       return _this.emit(Writer.CLOSED);
     };
   })(this));
   this.conn.on(WriterNSQDConnection.ERROR, (function(_this) {
     return function(err) {
-      _this.debug(&#x27;error&#x27;, err);
+      _this.debug('error', err);
       _this.ready = false;
       return _this.emit(Writer.ERROR, err);
     };
   })(this));
   return this.conn.on(WriterNSQDConnection.CONNECTION_ERROR, (function(_this) {
     return function(err) {
-      _this.debug(&#x27;error&#x27;, err);
+      _this.debug('error', err);
       _this.ready = false;
       return _this.emit(Writer.ERROR, err);
     };
@@ -5595,16 +5588,16 @@ w.on(&#x27;closed&#x27;, function () {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ```js
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var reader = new nsq.Reader(&#x27;sample_topic&#x27;, &#x27;test_channel&#x27;, {
-  lookupdHTTPAddresses: &#x27;127.0.0.1:4161&#x27;
+var reader = new nsq.Reader('sample_topic', 'test_channel', {
+  lookupdHTTPAddresses: '127.0.0.1:4161'
 });
 
 reader.<span class="apidocCodeKeywordSpan">connect</span>();
 
-reader.on(&#x27;message&#x27;, function (msg) {
-  console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
   msg.finish();
 });
 ```
@@ -5625,11 +5618,11 @@ reader.on(&#x27;message&#x27;, function (msg) {
   this.nsqdPort = nsqdPort;
   Writer.__super__.constructor.apply(this, arguments);
   this.setMaxListeners(10000);
-  this.debug = Debug(&#x22;nsqjs:writer:&#x22; + this.nsqdHost + &#x22;/&#x22; + this.nsqdPort);
+  this.debug = Debug("nsqjs:writer:" + this.nsqdHost + "/" + this.nsqdPort);
   this.config = new ConnectionConfig(options);
   this.config.validate();
   this.ready = false;
-  this.debug(&#x27;Configuration&#x27;);
+  this.debug('Configuration');
   this.debug(this.config);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -5647,11 +5640,11 @@ reader.on(&#x27;message&#x27;, function (msg) {
     <li>description and source-code<pre class="apidocCodePre">publish = function (topic, msgs, callback) {
   var connState, err, failed, msg, ready, ref, ref1, remove;
   connState = (ref = this.conn) != null ? (ref1 = ref.statemachine) != null ? ref1.current_state_name : void 0 : void 0;
-  if (!this.conn || (connState === &#x27;CLOSED&#x27; || connState === &#x27;ERROR&#x27;)) {
-    err = new Error(&#x27;No active Writer connection to send messages&#x27;);
+  if (!this.conn || (connState === 'CLOSED' || connState === 'ERROR')) {
+    err = new Error('No active Writer connection to send messages');
   }
   if (!msgs || _.isEmpty(msgs)) {
-    err = new Error(&#x27;Attempting to publish an empty message&#x27;);
+    err = new Error('Attempting to publish an empty message');
   }
   if (err) {
     if (callback) {
@@ -5667,7 +5660,7 @@ reader.on(&#x27;message&#x27;, function (msg) {
       };
     })(this);
     failed = function(err) {
-      err || (err = new Error(&#x27;Connection closed!&#x27;));
+      err || (err = new Error('Connection closed!'));
       remove();
       return callback(err);
     };
@@ -5689,7 +5682,7 @@ reader.on(&#x27;message&#x27;, function (msg) {
   msgs = (function() {
     var i, len, results;
     results = [];
-    for (i = 0, len = msgs.length; i &#x3c; len; i++) {
+    for (i = 0, len = msgs.length; i &lt; len; i++) {
       msg = msgs[i];
       if (_.isString(msg) || Buffer.isBuffer(msg)) {
         results.push(msg);
@@ -5702,21 +5695,21 @@ reader.on(&#x27;message&#x27;, function (msg) {
   return this.conn.produceMessages(topic, msgs, callback);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var w = new nsq.Writer(&#x27;127.0.0.1&#x27;, 4150);
+var w = new nsq.Writer('127.0.0.1', 4150);
 
 w.connect();
 
-w.on(&#x27;ready&#x27;, function () {
-w.<span class="apidocCodeKeywordSpan">publish</span>(&#x27;sample_topic&#x27;, &#x27;it really tied the room together&#x27;);
-w.publish(&#x27;sample_topic&#x27;, [
-  &#x27;Uh, excuse me. Mark it zero. Next frame.&#x27;,
-  &#x27;Smokey, this is not \&#x27;Nam. This is bowling. There are rules.&#x27;
+w.on('ready', function () {
+w.<span class="apidocCodeKeywordSpan">publish</span>('sample_topic', 'it really tied the room together');
+w.publish('sample_topic', [
+  'Uh, excuse me. Mark it zero. Next frame.',
+  'Smokey, this is not \'Nam. This is bowling. There are rules.'
 ]);
-w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
+w.publish('sample_topic', 'Wu?', function (err) {
   if (err) { return console.error(err.message); }
-  console.log(&#x27;Message sent successfully&#x27;);
+  console.log('Message sent successfully');
 ...</pre></li>
     </ul>
 
@@ -5738,19 +5731,19 @@ w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
   return this.conn.destroy();
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  w.publish(&#x27;sample_topic&#x27;, [
-    &#x27;Uh, excuse me. Mark it zero. Next frame.&#x27;,
-    &#x27;Smokey, this is not \&#x27;Nam. This is bowling. There are rules.&#x27;
+  w.publish('sample_topic', [
+    'Uh, excuse me. Mark it zero. Next frame.',
+    'Smokey, this is not \'Nam. This is bowling. There are rules.'
   ]);
-  w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
+  w.publish('sample_topic', 'Wu?', function (err) {
     if (err) { return console.error(err.message); }
-    console.log(&#x27;Message sent successfully&#x27;);
+    console.log('Message sent successfully');
     w.<span class="apidocCodeKeywordSpan">close</span>();
   });
 });
 
-w.on(&#x27;closed&#x27;, function () {
-  console.log(&#x27;Writer closed&#x27;);
+w.on('closed', function () {
+  console.log('Writer closed');
 });
 ```
 ...</pre></li>
@@ -5772,32 +5765,32 @@ w.on(&#x27;closed&#x27;, function () {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">connect = function () {
   this.conn = new WriterNSQDConnection(this.nsqdHost, this.nsqdPort, this.config);
-  this.debug(&#x27;connect&#x27;);
+  this.debug('connect');
   this.conn.connect();
   this.conn.on(WriterNSQDConnection.READY, (function(_this) {
     return function() {
-      _this.debug(&#x27;ready&#x27;);
+      _this.debug('ready');
       _this.ready = true;
       return _this.emit(Writer.READY);
     };
   })(this));
   this.conn.on(WriterNSQDConnection.CLOSED, (function(_this) {
     return function() {
-      _this.debug(&#x27;closed&#x27;);
+      _this.debug('closed');
       _this.ready = false;
       return _this.emit(Writer.CLOSED);
     };
   })(this));
   this.conn.on(WriterNSQDConnection.ERROR, (function(_this) {
     return function(err) {
-      _this.debug(&#x27;error&#x27;, err);
+      _this.debug('error', err);
       _this.ready = false;
       return _this.emit(Writer.ERROR, err);
     };
   })(this));
   return this.conn.on(WriterNSQDConnection.CONNECTION_ERROR, (function(_this) {
     return function(err) {
-      _this.debug(&#x27;error&#x27;, err);
+      _this.debug('error', err);
       _this.ready = false;
       return _this.emit(Writer.ERROR, err);
     };
@@ -5805,16 +5798,16 @@ w.on(&#x27;closed&#x27;, function () {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ```js
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var reader = new nsq.Reader(&#x27;sample_topic&#x27;, &#x27;test_channel&#x27;, {
-  lookupdHTTPAddresses: &#x27;127.0.0.1:4161&#x27;
+var reader = new nsq.Reader('sample_topic', 'test_channel', {
+  lookupdHTTPAddresses: '127.0.0.1:4161'
 });
 
 reader.<span class="apidocCodeKeywordSpan">connect</span>();
 
-reader.on(&#x27;message&#x27;, function (msg) {
-  console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
   msg.finish();
 });
 ```
@@ -5838,11 +5831,11 @@ reader.on(&#x27;message&#x27;, function (msg) {
     <li>description and source-code<pre class="apidocCodePre">publish = function (topic, msgs, callback) {
   var connState, err, failed, msg, ready, ref, ref1, remove;
   connState = (ref = this.conn) != null ? (ref1 = ref.statemachine) != null ? ref1.current_state_name : void 0 : void 0;
-  if (!this.conn || (connState === &#x27;CLOSED&#x27; || connState === &#x27;ERROR&#x27;)) {
-    err = new Error(&#x27;No active Writer connection to send messages&#x27;);
+  if (!this.conn || (connState === 'CLOSED' || connState === 'ERROR')) {
+    err = new Error('No active Writer connection to send messages');
   }
   if (!msgs || _.isEmpty(msgs)) {
-    err = new Error(&#x27;Attempting to publish an empty message&#x27;);
+    err = new Error('Attempting to publish an empty message');
   }
   if (err) {
     if (callback) {
@@ -5858,7 +5851,7 @@ reader.on(&#x27;message&#x27;, function (msg) {
       };
     })(this);
     failed = function(err) {
-      err || (err = new Error(&#x27;Connection closed!&#x27;));
+      err || (err = new Error('Connection closed!'));
       remove();
       return callback(err);
     };
@@ -5880,7 +5873,7 @@ reader.on(&#x27;message&#x27;, function (msg) {
   msgs = (function() {
     var i, len, results;
     results = [];
-    for (i = 0, len = msgs.length; i &#x3c; len; i++) {
+    for (i = 0, len = msgs.length; i &lt; len; i++) {
       msg = msgs[i];
       if (_.isString(msg) || Buffer.isBuffer(msg)) {
         results.push(msg);
@@ -5893,21 +5886,21 @@ reader.on(&#x27;message&#x27;, function (msg) {
   return this.conn.produceMessages(topic, msgs, callback);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-var nsq = require(&#x27;nsqjs&#x27;);
+var nsq = require('nsqjs');
 
-var w = new nsq.Writer(&#x27;127.0.0.1&#x27;, 4150);
+var w = new nsq.Writer('127.0.0.1', 4150);
 
 w.connect();
 
-w.on(&#x27;ready&#x27;, function () {
-w.<span class="apidocCodeKeywordSpan">publish</span>(&#x27;sample_topic&#x27;, &#x27;it really tied the room together&#x27;);
-w.publish(&#x27;sample_topic&#x27;, [
-  &#x27;Uh, excuse me. Mark it zero. Next frame.&#x27;,
-  &#x27;Smokey, this is not \&#x27;Nam. This is bowling. There are rules.&#x27;
+w.on('ready', function () {
+w.<span class="apidocCodeKeywordSpan">publish</span>('sample_topic', 'it really tied the room together');
+w.publish('sample_topic', [
+  'Uh, excuse me. Mark it zero. Next frame.',
+  'Smokey, this is not \'Nam. This is bowling. There are rules.'
 ]);
-w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
+w.publish('sample_topic', 'Wu?', function (err) {
   if (err) { return console.error(err.message); }
-  console.log(&#x27;Message sent successfully&#x27;);
+  console.log('Message sent successfully');
 ...</pre></li>
     </ul>
 
@@ -5932,7 +5925,7 @@ w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
     options = {};
   }
   WriterNSQDConnection.__super__.constructor.call(this, nsqdHost, nsqdPort, null, null, options);
-  this.debug = Debug(&#x22;nsqjs:writer:conn:&#x22; + nsqdHost + &#x22;/&#x22; + nsqdPort);
+  this.debug = Debug("nsqjs:writer:conn:" + nsqdHost + "/" + nsqdPort);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -5965,8 +5958,8 @@ w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -5991,7 +5984,7 @@ w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -6056,7 +6049,7 @@ w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
     options = {};
   }
   WriterNSQDConnection.__super__.constructor.call(this, nsqdHost, nsqdPort, null, null, options);
-  this.debug = Debug(&#x22;nsqjs:writer:conn:&#x22; + nsqdHost + &#x22;/&#x22; + nsqdPort);
+  this.debug = Debug("nsqjs:writer:conn:" + nsqdHost + "/" + nsqdPort);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -6071,7 +6064,7 @@ w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">produceMessages = function (topic, msgs, callback) {
-  return this.statemachine.raise(&#x27;produceMessages&#x27;, [topic, msgs, callback]);
+  return this.statemachine.raise('produceMessages', [topic, msgs, callback]);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -6111,7 +6104,7 @@ w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">produceMessages = function (topic, msgs, callback) {
-  return this.statemachine.raise(&#x27;produceMessages&#x27;, [topic, msgs, callback]);
+  return this.statemachine.raise('produceMessages', [topic, msgs, callback]);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -6177,7 +6170,7 @@ w.publish(&#x27;sample_topic&#x27;, &#x27;Wu?&#x27;, function (err) {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   pause: function() {
-    return this.goto(&#x27;PAUSE&#x27;);
+    return this.goto('PAUSE');
   },
   unpause: function() {}
 },
@@ -6210,13 +6203,13 @@ BACKOFF: {
   }
   onTimeout = (function(_this) {
     return function() {
-      _this.log(&#x27;Backoff done&#x27;);
-      return _this.raise(&#x27;try&#x27;);
+      _this.log('Backoff done');
+      return _this.raise('try');
     };
   })(this);
   delay = new Number(this.backoffTimer.<span class="apidocCodeKeywordSpan">getInterval</span>().valueOf()) * 1000;
   this.backoffId = setTimeout(onTimeout, delay);
-  return this.log(&#x22;Backoff for &#x22; + delay);
+  return this.log("Backoff for " + delay);
 };
 
 ReaderRdy.prototype.inFlight = function() {
@@ -6242,19 +6235,19 @@ ReaderRdy.prototype.inFlight = function() {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 Enter: function() {
-  return this[&#x22;try&#x22;]();
+  return this["try"]();
 },
 backoff: function() {
-  return this.goto(&#x27;BACKOFF&#x27;);
+  return this.goto('BACKOFF');
 },
 success: function(connectionRdy) {
   this.backoffTimer.<span class="apidocCodeKeywordSpan">success</span>();
   this.onMessageSuccess(connectionRdy);
-  return this.goto(&#x27;MAX&#x27;);
+  return this.goto('MAX');
 },
-&#x22;try&#x22;: function() {},
+"try": function() {},
 pause: function() {
-  return this.goto(&#x27;PAUSE&#x27;);
+  return this.goto('PAUSE');
 },
 ...</pre></li>
     </ul>
@@ -6346,10 +6339,10 @@ pause: function() {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">frameSize = function (offset) {
-  if (!(this.buffer &#x26;&#x26; this.buffer.length &#x3e; 4)) {
+  if (!(this.buffer &amp;&amp; this.buffer.length &gt; 4)) {
     return;
   }
-  if (offset + 4 &#x3c;= this.buffer.length) {
+  if (offset + 4 &lt;= this.buffer.length) {
     return 4 + this.buffer.readInt32BE(offset);
   }
 }</pre></li>
@@ -6361,7 +6354,7 @@ FrameBuffer.prototype.nextFrame = function() {
   if (!this.buffer) {
     return;
   }
-  if (!(this.<span class="apidocCodeKeywordSpan">frameSize</span>(0) &#x26;&#x26; this.frameSize(0) &#x3c;= this.buffer.length)) {
+  if (!(this.<span class="apidocCodeKeywordSpan">frameSize</span>(0) &amp;&amp; this.frameSize(0) &lt;= this.buffer.length)) {
     return;
   }
   frame = this.pluckFrame();
@@ -6386,7 +6379,7 @@ FrameBuffer.prototype.nextFrame = function() {
   if (!this.buffer) {
     return;
   }
-  if (!(this.frameSize(0) &#x26;&#x26; this.frameSize(0) &#x3c;= this.buffer.length)) {
+  if (!(this.frameSize(0) &amp;&amp; this.frameSize(0) &lt;= this.buffer.length)) {
     return;
   }
   frame = this.pluckFrame();
@@ -6423,7 +6416,7 @@ FrameBuffer.prototype.nextFrame = function() {
   if (!this.buffer) {
     return;
   }
-  if (!(this.frameSize(0) &#x26;&#x26; this.frameSize(0) &#x3c;= this.buffer.length)) {
+  if (!(this.frameSize(0) &amp;&amp; this.frameSize(0) &lt;= this.buffer.length)) {
     return;
   }
   frame = this.pluckFrame();
@@ -6460,7 +6453,7 @@ FrameBuffer.prototype.nextFrame = function() {
   if (!this.buffer) {
     return;
   }
-  if (!(this.frameSize(0) &#x26;&#x26; this.frameSize(0) &#x3c;= this.buffer.length)) {
+  if (!(this.frameSize(0) &amp;&amp; this.frameSize(0) &lt;= this.buffer.length)) {
     return;
   }
   frame = this.<span class="apidocCodeKeywordSpan">pluckFrame</span>();
@@ -6492,12 +6485,12 @@ FrameBuffer.prototype.nextFrame = function() {
   var endpointURL;
   endpointURL = function(endpoint) {
     var parsedUrl;
-    if (endpoint.indexOf(&#x27;://&#x27;) === -1) {
-      endpoint = &#x22;http://&#x22; + endpoint;
+    if (endpoint.indexOf('://') === -1) {
+      endpoint = "http://" + endpoint;
     }
     parsedUrl = url.parse(endpoint, true);
-    if ((!parsedUrl.pathname) || (parsedUrl.pathname === &#x27;/&#x27;)) {
-      parsedUrl.pathname = &#x22;/lookup&#x22;;
+    if ((!parsedUrl.pathname) || (parsedUrl.pathname === '/')) {
+      parsedUrl.pathname = "/lookup";
     }
     parsedUrl.query.topic = topic;
     delete parsedUrl.search;
@@ -6586,8 +6579,8 @@ FrameBuffer.prototype.nextFrame = function() {
   this.domain = null;
   if (EventEmitter.usingDomains) {
     // if there is an active domain, then attach to it.
-    domain = domain || require(&#x27;domain&#x27;);
-    if (domain.active &#x26;&#x26; !(this instanceof domain.Domain)) {
+    domain = domain || require('domain');
+    if (domain.active &amp;&amp; !(this instanceof domain.Domain)) {
       this.domain = domain.active;
     }
   }
@@ -6612,7 +6605,7 @@ FrameBuffer.prototype.nextFrame = function() {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">listenerCount = function (emitter, type) {
-  if (typeof emitter.listenerCount === &#x27;function&#x27;) {
+  if (typeof emitter.listenerCount === 'function') {
     return emitter.listenerCount(type);
   } else {
     return listenerCount.call(emitter, type);
@@ -6696,20 +6689,20 @@ FrameBuffer.prototype.nextFrame = function() {
   return this.respond(Message.FINISH, wire.finish(this.id));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  lookupdHTTPAddresses: &#x27;127.0.0.1:4161&#x27;
+  lookupdHTTPAddresses: '127.0.0.1:4161'
 });
 
 reader.connect();
 
-reader.on(&#x27;message&#x27;, function (msg) {
-  console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
   msg.<span class="apidocCodeKeywordSpan">finish</span>();
 });
 ```
 
 #### CoffeeScript
 ```coffee-script
-nsq = require &#x27;nsqjs&#x27;
+nsq = require 'nsqjs'
 ...</pre></li>
     </ul>
 
@@ -6729,7 +6722,7 @@ nsq = require &#x27;nsqjs&#x27;
       this.parsed = JSON.parse(this.body);
     } catch (error) {
       err = error;
-      throw new Error(&#x22;Invalid JSON in Message&#x22;);
+      throw new Error("Invalid JSON in Message");
     }
   }
   return this.parsed;
@@ -6840,18 +6833,18 @@ Message.prototype.requeue = function(delay, backoff) {
     return null;
   }
   delta = hard ? this.receivedOn + this.maxMsgTimeout - Date.now() : this.lastTouched + this.msgTimeout - Date.now();
-  if (delta &#x3e; 0) {
+  if (delta &gt; 0) {
     return delta;
   } else {
     return null;
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-console.log(&#x27;Received message [%s]&#x27;, msg.id);
+console.log('Received message [%s]', msg.id);
 
 function touch() {
   if (!msg.hasResponded) {
-    console.log(&#x27;Touch [%s]&#x27;, msg.id);
+    console.log('Touch [%s]', msg.id);
     msg.touch();
     // Touch the message again a second before the next timeout.
     setTimeout(touch, msg.<span class="apidocCodeKeywordSpan">timeUntilTimeout</span>() - 1000);
@@ -6859,7 +6852,7 @@ function touch() {
 }
 
 function finish() {
-  console.log(&#x27;Finished message [%s]: %s&#x27;, msg.id, msg.body.toString());
+  console.log('Finished message [%s]: %s', msg.id, msg.body.toString());
   msg.finish();
 }
 ...</pre></li>
@@ -6881,12 +6874,12 @@ function finish() {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-reader.on(&#x27;message&#x27;, function (msg) {
-console.log(&#x27;Received message [%s]&#x27;, msg.id);
+reader.on('message', function (msg) {
+console.log('Received message [%s]', msg.id);
 
 function touch() {
   if (!msg.hasResponded) {
-    console.log(&#x27;Touch [%s]&#x27;, msg.id);
+    console.log('Touch [%s]', msg.id);
     msg.<span class="apidocCodeKeywordSpan">touch</span>();
     // Touch the message again a second before the next timeout.
     setTimeout(touch, msg.timeUntilTimeout() - 1000);
@@ -6894,7 +6887,7 @@ function touch() {
 }
 
 function finish() {
-  console.log(&#x27;Finished message [%s]: %s&#x27;, msg.id, msg.body.toString());
+  console.log('Finished message [%s]: %s', msg.id, msg.body.toString());
 ...</pre></li>
     </ul>
 
@@ -6915,9 +6908,9 @@ function finish() {
     <li>description and source-code<pre class="apidocCodePre">function ConnectionRdy(conn1) {
   var connId, readerId;
   this.conn = conn1;
-  readerId = this.conn.topic + &#x22;/&#x22; + this.conn.channel;
-  connId = &#x22;&#x22; + (this.conn.id().replace(&#x27;:&#x27;, &#x27;/&#x27;));
-  this.debug = Debug(&#x22;nsqjs:reader:&#x22; + readerId + &#x22;:rdy:conn:&#x22; + connId);
+  readerId = this.conn.topic + "/" + this.conn.channel;
+  connId = "" + (this.conn.id().replace(':', '/'));
+  this.debug = Debug("nsqjs:reader:" + readerId + ":rdy:conn:" + connId);
   this.maxConnRdy = 0;
   this.inFlight = 0;
   this.lastRdySent = 0;
@@ -6971,10 +6964,10 @@ function finish() {
   this.maxBackoffDuration = maxBackoffDuration;
   this.readerId = readerId1;
   this.lowRdyTimeout = lowRdyTimeout != null ? lowRdyTimeout : 1.5;
-  this.debug = Debug(&#x22;nsqjs:reader:&#x22; + this.readerId + &#x22;:rdy&#x22;);
+  this.debug = Debug("nsqjs:reader:" + this.readerId + ":rdy");
   ReaderRdy.__super__.constructor.call(this, {
     autostart: true,
-    initial_state: &#x27;ZERO&#x27;,
+    initial_state: 'ZERO',
     sync_goto: true
   });
   this.id = ReaderRdy.getId();
@@ -7026,7 +7019,7 @@ function finish() {
   return this.lst.push(item);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    return _this.raise(&#x27;backoff&#x27;);
+    return _this.raise('backoff');
   };
 })(this));
 return connectionRdy.on(ConnectionRdy.READY, (function(_this) {
@@ -7035,9 +7028,9 @@ return connectionRdy.on(ConnectionRdy.READY, (function(_this) {
     _this.connections.push(connectionRdy);
     _this.roundRobinConnections.<span class="apidocCodeKeywordSpan">add</span>(connectionRdy);
     _this.balance();
-    if (_this.current_state_name === &#x27;ZERO&#x27;) {
-      return _this.goto(&#x27;MAX&#x27;);
-    } else if ((ref = _this.current_state_name) === &#x27;TRY_ONE&#x27; || ref === &#x27;MAX&#x27;) {
+    if (_this.current_state_name === 'ZERO') {
+      return _this.goto('MAX');
+    } else if ((ref = _this.current_state_name) === 'TRY_ONE' || ref === 'MAX') {
       return connectionRdy.bump();
     }
   };
@@ -7081,12 +7074,12 @@ return connectionRdy.on(ConnectionRdy.READY, (function(_this) {
 perConnectionMax = Math.floor(max / this.connections.length);
 if (perConnectionMax === 0) {
   ref = this.connections;
-  for (j = 0, len = ref.length; j &#x3c; len; j++) {
+  for (j = 0, len = ref.length; j &lt; len; j++) {
     c = ref[j];
     c.backoff();
   }
   ref1 = this.roundRobinConnections.<span class="apidocCodeKeywordSpan">next</span>(max - this.inFlight());
-  for (k = 0, len1 = ref1.length; k &#x3c; len1; k++) {
+  for (k = 0, len1 = ref1.length; k &lt; len1; k++) {
     c = ref1[k];
     c.setConnectionRdyMax(1);
     c.bump();
@@ -7111,7 +7104,7 @@ if (perConnectionMax === 0) {
   if (itemIndex === -1) {
     return;
   }
-  if (this.index &#x3e; itemIndex) {
+  if (this.index &gt; itemIndex) {
     this.index -= 1;
   }
   return this.lst.splice(itemIndex, 1);
@@ -7126,7 +7119,7 @@ ReaderRdy.prototype.removeConnection = function(conn) {
   this.connections.splice(this.connections.indexOf(conn), 1);
   this.roundRobinConnections.<span class="apidocCodeKeywordSpan">remove</span>(conn);
   if (this.connections.length === 0) {
-    return this.goto(&#x27;ZERO&#x27;);
+    return this.goto('ZERO');
   }
 };
 
@@ -7150,7 +7143,7 @@ ReaderRdy.prototype.bump = function() {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">auth = function (token) {
-  return command(&#x27;AUTH&#x27;, token);
+  return command('AUTH', token);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -7165,26 +7158,26 @@ ReaderRdy.prototype.bump = function() {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">finish = function (id) {
-  if (!(Buffer.byteLength(id) &#x3c;= 16)) {
-    throw new Error(&#x22;FINISH invalid id (&#x22; + id + &#x22;)&#x22;);
+  if (!(Buffer.byteLength(id) &lt;= 16)) {
+    throw new Error("FINISH invalid id (" + id + ")");
   }
-  return command(&#x27;FIN&#x27;, null, id);
+  return command('FIN', null, id);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  lookupdHTTPAddresses: &#x27;127.0.0.1:4161&#x27;
+  lookupdHTTPAddresses: '127.0.0.1:4161'
 });
 
 reader.connect();
 
-reader.on(&#x27;message&#x27;, function (msg) {
-  console.log(&#x27;Received message [%s]: %s&#x27;, msg.id, msg.body.toString());
+reader.on('message', function (msg) {
+  console.log('Received message [%s]: %s', msg.id, msg.body.toString());
   msg.<span class="apidocCodeKeywordSpan">finish</span>();
 });
 ```
 
 #### CoffeeScript
 ```coffee-script
-nsq = require &#x27;nsqjs&#x27;
+nsq = require 'nsqjs'
 ...</pre></li>
     </ul>
 
@@ -7199,15 +7192,15 @@ nsq = require &#x27;nsqjs&#x27;
     <ul>
     <li>description and source-code<pre class="apidocCodePre">identify = function (data) {
   var unexpectedKeys, validIdentifyKeys;
-  validIdentifyKeys = [&#x27;client_id&#x27;, &#x27;deflate&#x27;, &#x27;deflate_level&#x27;, &#x27;feature_negotiation&#x27;, &#x27;heartbeat_interval&#x27;, &#x27;long_id&#x27;, &#x27;msg_timeout
-&#x27;, &#x27;output_buffer_size&#x27;, &#x27;output_buffer_timeout&#x27;, &#x27;sample_rate&#x27;, &#x27;short_id&#x27;, &#x27;snappy&#x27;, &#x27;tls_v1&#x27;, &#x27;user_agent&#x27;];
+  validIdentifyKeys = ['client_id', 'deflate', 'deflate_level', 'feature_negotiation', 'heartbeat_interval', 'long_id', 'msg_timeout
+', 'output_buffer_size', 'output_buffer_timeout', 'sample_rate', 'short_id', 'snappy', 'tls_v1', 'user_agent'];
   unexpectedKeys = _.filter(_.keys(data), function(k) {
-    return indexOf.call(validIdentifyKeys, k) &#x3c; 0;
+    return indexOf.call(validIdentifyKeys, k) &lt; 0;
   });
   if (unexpectedKeys.length) {
-    throw new Error(&#x22;Unexpected IDENTIFY keys: &#x22; + unexpectedKeys);
+    throw new Error("Unexpected IDENTIFY keys: " + unexpectedKeys);
   }
-  return command(&#x27;IDENTIFY&#x27;, JSON_stringify(data));
+  return command('IDENTIFY', JSON_stringify(data));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -7224,7 +7217,7 @@ nsq = require &#x27;nsqjs&#x27;
     <li>description and source-code<pre class="apidocCodePre">mpub = function (topic, data) {
   var messages, numMessagesBuffer;
   if (!_.isArray(data)) {
-    throw new Error(&#x22;MPUB requires an array of message&#x22;);
+    throw new Error("MPUB requires an array of message");
   }
   messages = _.map(data, function(message) {
     var buffer;
@@ -7240,7 +7233,7 @@ nsq = require &#x27;nsqjs&#x27;
   numMessagesBuffer = Buffer(4);
   numMessagesBuffer.writeInt32BE(messages.length, 0);
   messages.unshift(numMessagesBuffer);
-  return command(&#x27;MPUB&#x27;, Buffer.concat(messages), topic);
+  return command('MPUB', Buffer.concat(messages), topic);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -7255,7 +7248,7 @@ nsq = require &#x27;nsqjs&#x27;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">nop = function () {
-  return command(&#x27;NOP&#x27;, null);
+  return command('NOP', null);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -7270,7 +7263,7 @@ nsq = require &#x27;nsqjs&#x27;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">pub = function (topic, data) {
-  return command(&#x27;PUB&#x27;, data, topic);
+  return command('PUB', data, topic);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -7286,12 +7279,12 @@ nsq = require &#x27;nsqjs&#x27;
     <ul>
     <li>description and source-code<pre class="apidocCodePre">ready = function (count) {
   if (!_.isNumber(count)) {
-    throw new Error(&#x22;RDY count (&#x22; + count + &#x22;) is not a number&#x22;);
+    throw new Error("RDY count (" + count + ") is not a number");
   }
-  if (!(count &#x3e;= 0)) {
-    throw new Error(&#x22;RDY count (&#x22; + count + &#x22;) is not positive&#x22;);
+  if (!(count &gt;= 0)) {
+    throw new Error("RDY count (" + count + ") is not positive");
   }
-  return command(&#x27;RDY&#x27;, null, count.toString());
+  return command('RDY', null, count.toString());
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -7310,13 +7303,13 @@ nsq = require &#x27;nsqjs&#x27;
   if (timeMs == null) {
     timeMs = 0;
   }
-  if (!(Buffer.byteLength(id) &#x3c;= 16)) {
-    throw new Error(&#x22;REQUEUE invalid id (&#x22; + id + &#x22;)&#x22;);
+  if (!(Buffer.byteLength(id) &lt;= 16)) {
+    throw new Error("REQUEUE invalid id (" + id + ")");
   }
   if (!_.isNumber(timeMs)) {
-    throw new Error(&#x22;REQUEUE delay time is invalid (&#x22; + timeMs + &#x22;)&#x22;);
+    throw new Error("REQUEUE delay time is invalid (" + timeMs + ")");
   }
-  parameters = [&#x27;REQ&#x27;, null, id, timeMs];
+  parameters = ['REQ', null, id, timeMs];
   return command.apply(null, parameters);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
@@ -7349,12 +7342,12 @@ Message.prototype.touch = function() {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">subscribe = function (topic, channel) {
   if (!validTopicName(topic)) {
-    throw new Error(&#x22;Invalid topic: &#x22; + topic);
+    throw new Error("Invalid topic: " + topic);
   }
   if (!validChannelName(channel)) {
-    throw new Error(&#x22;Invalid channel: &#x22; + channel);
+    throw new Error("Invalid channel: " + channel);
   }
-  return command(&#x27;SUB&#x27;, null, topic, channel);
+  return command('SUB', null, topic, channel);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -7369,16 +7362,16 @@ Message.prototype.touch = function() {
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">touch = function (id) {
-  return command(&#x27;TOUCH&#x27;, null, id);
+  return command('TOUCH', null, id);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-reader.on(&#x27;message&#x27;, function (msg) {
-console.log(&#x27;Received message [%s]&#x27;, msg.id);
+reader.on('message', function (msg) {
+console.log('Received message [%s]', msg.id);
 
 function touch() {
   if (!msg.hasResponded) {
-    console.log(&#x27;Touch [%s]&#x27;, msg.id);
+    console.log('Touch [%s]', msg.id);
     msg.<span class="apidocCodeKeywordSpan">touch</span>();
     // Touch the message again a second before the next timeout.
     setTimeout(touch, msg.timeUntilTimeout() - 1000);
@@ -7386,7 +7379,7 @@ function touch() {
 }
 
 function finish() {
-  console.log(&#x27;Finished message [%s]: %s&#x27;, msg.id, msg.body.toString());
+  console.log('Finished message [%s]: %s', msg.id, msg.body.toString());
 ...</pre></li>
     </ul>
 
@@ -7428,3 +7421,4 @@ function finish() {
     ]
 </div>
 </div>
+</body></html>
